@@ -25,3 +25,9 @@
 
 # Ignore gemfile.lock
 Gemfile.lock
+
+# Ignore .env file containing credentials.
+.env
+
+# Ignore yml files
+*.yml
