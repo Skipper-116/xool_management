@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_192943) do
+ActiveRecord::Schema.define(version: 2022_08_31_193834) do
 
   create_table "classroom_facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -168,6 +168,21 @@ ActiveRecord::Schema.define(version: 2022_08_31_192943) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "student_registries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "classroom_id"
+    t.bigint "cohort_term_id"
+    t.bigint "person_id"
+    t.bigint "captured_by", null: false
+    t.boolean "present", default: false
+    t.string "absent_reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["captured_by"], name: "fk_rails_0c2db770b6"
+    t.index ["classroom_id"], name: "index_student_registries_on_classroom_id"
+    t.index ["cohort_term_id"], name: "index_student_registries_on_cohort_term_id"
+    t.index ["person_id"], name: "index_student_registries_on_person_id"
+  end
+
   create_table "user_roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "role_id"
     t.bigint "person_id"
@@ -207,6 +222,10 @@ ActiveRecord::Schema.define(version: 2022_08_31_192943) do
   add_foreign_key "relationships", "people", column: "person_a"
   add_foreign_key "relationships", "people", column: "person_b"
   add_foreign_key "relationships", "relationship_types"
+  add_foreign_key "student_registries", "classrooms"
+  add_foreign_key "student_registries", "cohort_terms"
+  add_foreign_key "student_registries", "people"
+  add_foreign_key "student_registries", "people", column: "captured_by"
   add_foreign_key "user_roles", "people"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "users", "people"
