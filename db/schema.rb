@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_191920) do
+ActiveRecord::Schema.define(version: 2022_08_31_192316) do
 
   create_table "classroom_facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -34,6 +34,19 @@ ActiveRecord::Schema.define(version: 2022_08_31_191920) do
     t.datetime "date_voided"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cohort_terms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "cohort_id"
+    t.boolean "voided", default: false
+    t.string "void_reason"
+    t.datetime "date_voided"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cohort_id"], name: "index_cohort_terms_on_cohort_id"
   end
 
   create_table "cohorts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -151,6 +164,7 @@ ActiveRecord::Schema.define(version: 2022_08_31_191920) do
   end
 
   add_foreign_key "classroom_facilities", "classrooms"
+  add_foreign_key "cohort_terms", "cohorts"
   add_foreign_key "people", "genders"
   add_foreign_key "person_attributes", "people"
   add_foreign_key "person_attributes", "person_attribute_types"
