@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_180853) do
+ActiveRecord::Schema.define(version: 2022_08_31_183412) do
 
   create_table "genders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -56,6 +56,14 @@ ActiveRecord::Schema.define(version: 2022_08_31_180853) do
     t.index ["person_id"], name: "index_person_names_on_person_id"
   end
 
+  create_table "profile_pictures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "image_url"
+    t.bigint "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_profile_pictures_on_person_id"
+  end
+
   create_table "relationship_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "a_is_to_b"
     t.string "b_is_to_a"
@@ -79,6 +87,7 @@ ActiveRecord::Schema.define(version: 2022_08_31_180853) do
   add_foreign_key "person_attributes", "people"
   add_foreign_key "person_attributes", "person_attribute_types"
   add_foreign_key "person_names", "people"
+  add_foreign_key "profile_pictures", "people"
   add_foreign_key "relationships", "people", column: "person_a"
   add_foreign_key "relationships", "people", column: "person_b"
   add_foreign_key "relationships", "relationship_types"
