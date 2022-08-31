@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_174328) do
+ActiveRecord::Schema.define(version: 2022_08_31_180330) do
 
   create_table "genders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(version: 2022_08_31_174328) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "person_attributes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "person_id"
+    t.bigint "person_attribute_type_id"
+    t.string "attribute_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_attribute_type_id"], name: "index_person_attributes_on_person_attribute_type_id"
+    t.index ["person_id"], name: "index_person_attributes_on_person_id"
+  end
+
   create_table "person_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "given_name"
     t.string "family_name"
@@ -46,6 +56,16 @@ ActiveRecord::Schema.define(version: 2022_08_31_174328) do
     t.index ["person_id"], name: "index_person_names_on_person_id"
   end
 
+  create_table "relationship_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "a_is_to_b"
+    t.string "b_is_to_a"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "people", "genders"
+  add_foreign_key "person_attributes", "people"
+  add_foreign_key "person_attributes", "person_attribute_types"
   add_foreign_key "person_names", "people"
 end
