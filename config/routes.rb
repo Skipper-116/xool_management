@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :test_types
   resources :teacher_subjects
   resources :subjects
   resources :teacher_registries
