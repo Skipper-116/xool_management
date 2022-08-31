@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_180330) do
+ActiveRecord::Schema.define(version: 2022_08_31_180853) do
 
   create_table "genders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -64,8 +64,22 @@ ActiveRecord::Schema.define(version: 2022_08_31_180330) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "person_a", null: false
+    t.bigint "relationship_type_id"
+    t.bigint "person_b", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_a"], name: "fk_rails_a2033e96cc"
+    t.index ["person_b"], name: "fk_rails_cdb1b80acf"
+    t.index ["relationship_type_id"], name: "index_relationships_on_relationship_type_id"
+  end
+
   add_foreign_key "people", "genders"
   add_foreign_key "person_attributes", "people"
   add_foreign_key "person_attributes", "person_attribute_types"
   add_foreign_key "person_names", "people"
+  add_foreign_key "relationships", "people", column: "person_a"
+  add_foreign_key "relationships", "people", column: "person_b"
+  add_foreign_key "relationships", "relationship_types"
 end
