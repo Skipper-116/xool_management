@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :roles
+  resources :users
   resources :profile_pictures
   resources :relationships
   resources :relationship_types
