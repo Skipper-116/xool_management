@@ -8,6 +8,9 @@ class CreateStudentRegistries < ActiveRecord::Migration[5.2]
       t.bigint :captured_by, null: false
       t.boolean :present, default: false
       t.string :absent_reason, null: true
+      t.boolean :voided, default: false
+      t.string :void_reason
+      t.datetime :date_voided, null: true
 
       t.timestamps
     end
