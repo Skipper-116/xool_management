@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_192316) do
+ActiveRecord::Schema.define(version: 2022_08_31_192943) do
 
   create_table "classroom_facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -23,6 +23,34 @@ ActiveRecord::Schema.define(version: 2022_08_31_192316) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["classroom_id"], name: "index_classroom_facilities_on_classroom_id"
+  end
+
+  create_table "classroom_students", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "classroom_id"
+    t.bigint "cohort_term_id"
+    t.bigint "person_id"
+    t.boolean "voided", default: false
+    t.string "void_reason"
+    t.datetime "date_voided"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_classroom_students_on_classroom_id"
+    t.index ["cohort_term_id"], name: "index_classroom_students_on_cohort_term_id"
+    t.index ["person_id"], name: "index_classroom_students_on_person_id"
+  end
+
+  create_table "classroom_teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "classroom_id"
+    t.bigint "cohort_term_id"
+    t.bigint "person_id"
+    t.boolean "voided", default: false
+    t.string "void_reason"
+    t.datetime "date_voided"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_classroom_teachers_on_classroom_id"
+    t.index ["cohort_term_id"], name: "index_classroom_teachers_on_cohort_term_id"
+    t.index ["person_id"], name: "index_classroom_teachers_on_person_id"
   end
 
   create_table "classrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -164,6 +192,12 @@ ActiveRecord::Schema.define(version: 2022_08_31_192316) do
   end
 
   add_foreign_key "classroom_facilities", "classrooms"
+  add_foreign_key "classroom_students", "classrooms"
+  add_foreign_key "classroom_students", "cohort_terms"
+  add_foreign_key "classroom_students", "people"
+  add_foreign_key "classroom_teachers", "classrooms"
+  add_foreign_key "classroom_teachers", "cohort_terms"
+  add_foreign_key "classroom_teachers", "people"
   add_foreign_key "cohort_terms", "cohorts"
   add_foreign_key "people", "genders"
   add_foreign_key "person_attributes", "people"
