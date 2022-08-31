@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_191217) do
+ActiveRecord::Schema.define(version: 2022_08_31_191920) do
 
   create_table "classroom_facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -29,6 +29,19 @@ ActiveRecord::Schema.define(version: 2022_08_31_191217) do
     t.string "name"
     t.string "description"
     t.float "space"
+    t.boolean "voided", default: false
+    t.string "void_reason"
+    t.datetime "date_voided"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cohorts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "description"
     t.boolean "voided", default: false
     t.string "void_reason"
     t.datetime "date_voided"
