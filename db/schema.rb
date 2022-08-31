@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_200906) do
+ActiveRecord::Schema.define(version: 2022_08_31_201208) do
 
   create_table "classroom_facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -212,6 +212,18 @@ ActiveRecord::Schema.define(version: 2022_08_31_200906) do
     t.index ["person_id"], name: "index_teacher_registries_on_person_id"
   end
 
+  create_table "teacher_subjects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "person_id"
+    t.bigint "subject_id"
+    t.boolean "voided", default: false
+    t.string "void_reason"
+    t.datetime "date_voided"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_teacher_subjects_on_person_id"
+    t.index ["subject_id"], name: "index_teacher_subjects_on_subject_id"
+  end
+
   create_table "user_roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "role_id"
     t.bigint "person_id"
@@ -258,6 +270,8 @@ ActiveRecord::Schema.define(version: 2022_08_31_200906) do
   add_foreign_key "teacher_registries", "cohorts"
   add_foreign_key "teacher_registries", "people"
   add_foreign_key "teacher_registries", "people", column: "captured_by"
+  add_foreign_key "teacher_subjects", "people"
+  add_foreign_key "teacher_subjects", "subjects"
   add_foreign_key "user_roles", "people"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "users", "people"
