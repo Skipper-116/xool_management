@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_185946) do
+ActiveRecord::Schema.define(version: 2022_08_31_190208) do
 
   create_table "genders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -90,6 +90,18 @@ ActiveRecord::Schema.define(version: 2022_08_31_185946) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "role_id"
+    t.bigint "person_id"
+    t.boolean "voided", default: false
+    t.string "void_reason"
+    t.datetime "date_voided"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_user_roles_on_person_id"
+    t.index ["role_id"], name: "index_user_roles_on_role_id"
+  end
+
   create_table "users", primary_key: "person_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "username"
     t.string "password"
@@ -109,5 +121,7 @@ ActiveRecord::Schema.define(version: 2022_08_31_185946) do
   add_foreign_key "relationships", "people", column: "person_a"
   add_foreign_key "relationships", "people", column: "person_b"
   add_foreign_key "relationships", "relationship_types"
+  add_foreign_key "user_roles", "people"
+  add_foreign_key "user_roles", "roles"
   add_foreign_key "users", "people"
 end
