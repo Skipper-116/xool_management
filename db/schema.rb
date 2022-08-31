@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_190729) do
+ActiveRecord::Schema.define(version: 2022_08_31_191217) do
+
+  create_table "classroom_facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.float "quantity"
+    t.bigint "classroom_id"
+    t.boolean "voided", default: false
+    t.string "void_reason"
+    t.datetime "date_voided"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_classroom_facilities_on_classroom_id"
+  end
 
   create_table "classrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -124,6 +137,7 @@ ActiveRecord::Schema.define(version: 2022_08_31_190729) do
     t.index ["person_id"], name: "index_users_on_person_id"
   end
 
+  add_foreign_key "classroom_facilities", "classrooms"
   add_foreign_key "people", "genders"
   add_foreign_key "person_attributes", "people"
   add_foreign_key "person_attributes", "person_attribute_types"
