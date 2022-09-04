@@ -1,4 +1,4 @@
-class CohortsController < ApplicationController
+class Api::V1::CohortsController < ApplicationController
   before_action :set_cohort, only: [:show, :update, :destroy]
 
   # GET /cohorts

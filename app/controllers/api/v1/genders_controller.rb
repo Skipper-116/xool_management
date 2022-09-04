@@ -1,4 +1,4 @@
-class GendersController < ApplicationController
+class Api::V1::GendersController < ApplicationController
   before_action :set_gender, only: [:show, :update, :destroy]
 
   # GET /genders

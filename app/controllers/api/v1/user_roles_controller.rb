@@ -1,4 +1,4 @@
-class UserRolesController < ApplicationController
+class Api::V1::UserRolesController < ApplicationController
   before_action :set_user_role, only: [:show, :update, :destroy]
 
   # GET /user_roles
