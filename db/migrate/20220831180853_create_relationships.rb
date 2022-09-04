@@ -4,6 +4,9 @@ class CreateRelationships < ActiveRecord::Migration[5.2]
       t.bigint :person_a, null: false
       t.references :relationship_type, foreign_key: true
       t.bigint :person_b, null: false
+      t.boolean :voided, default: false
+      t.string :void_reason
+      t.datetime :date_voided, null: true
 
       t.timestamps
     end

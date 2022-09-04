@@ -4,6 +4,9 @@ class CreatePersonAttributes < ActiveRecord::Migration[5.2]
       t.references :person, foreign_key: true
       t.references :person_attribute_type, foreign_key: true
       t.string :attribute_value, length: 500
+      t.boolean :voided, default: false
+      t.string :void_reason
+      t.datetime :date_voided, null: true
 
       t.timestamps
     end
