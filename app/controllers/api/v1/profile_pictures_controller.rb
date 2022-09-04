@@ -1,4 +1,4 @@
-class ProfilePicturesController < ApplicationController
+class Api::V1::ProfilePicturesController < ApplicationController
   before_action :set_profile_picture, only: [:show, :update, :destroy]
 
   # GET /profile_pictures

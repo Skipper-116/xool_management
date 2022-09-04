@@ -1,4 +1,4 @@
-class PersonAttributeTypesController < ApplicationController
+class Api::V1::PersonAttributeTypesController < ApplicationController
   before_action :set_person_attribute_type, only: [:show, :update, :destroy]
 
   # GET /person_attribute_types

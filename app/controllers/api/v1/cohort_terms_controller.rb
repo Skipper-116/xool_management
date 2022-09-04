@@ -1,4 +1,4 @@
-class CohortTermsController < ApplicationController
+class Api::V1::CohortTermsController < ApplicationController
   before_action :set_cohort_term, only: [:show, :update, :destroy]
 
   # GET /cohort_terms

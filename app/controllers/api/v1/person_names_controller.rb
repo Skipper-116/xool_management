@@ -1,4 +1,4 @@
-class PersonNamesController < ApplicationController
+class Api::V1::PersonNamesController < ApplicationController
   before_action :set_person_name, only: [:show, :update, :destroy]
 
   # GET /person_names

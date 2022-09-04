@@ -1,4 +1,4 @@
-class TeacherRegistriesController < ApplicationController
+class Api::V1::TeacherRegistriesController < ApplicationController
   before_action :set_teacher_registry, only: [:show, :update, :destroy]
 
   # GET /teacher_registries

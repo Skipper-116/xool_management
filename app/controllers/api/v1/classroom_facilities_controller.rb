@@ -1,4 +1,4 @@
-class ClassroomFacilitiesController < ApplicationController
+class Api::V1::ClassroomFacilitiesController < ApplicationController
   before_action :set_classroom_facility, only: [:show, :update, :destroy]
 
   # GET /classroom_facilities

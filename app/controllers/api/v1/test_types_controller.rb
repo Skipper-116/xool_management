@@ -1,4 +1,4 @@
-class TestTypesController < ApplicationController
+class Api::V1::TestTypesController < ApplicationController
   before_action :set_test_type, only: [:show, :update, :destroy]
 
   # GET /test_types

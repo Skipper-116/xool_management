@@ -1,4 +1,4 @@
-class RelationshipsController < ApplicationController
+class Api::V1::RelationshipsController < ApplicationController
   before_action :set_relationship, only: [:show, :update, :destroy]
 
   # GET /relationships

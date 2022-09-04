@@ -1,4 +1,4 @@
-class PersonAttributesController < ApplicationController
+class Api::V1::PersonAttributesController < ApplicationController
   before_action :set_person_attribute, only: [:show, :update, :destroy]
 
   # GET /person_attributes

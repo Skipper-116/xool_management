@@ -1,4 +1,4 @@
-class RelationshipTypesController < ApplicationController
+class Api::V1::RelationshipTypesController < ApplicationController
   before_action :set_relationship_type, only: [:show, :update, :destroy]
 
   # GET /relationship_types
