@@ -276,7 +276,8 @@ ActiveRecord::Schema.define(version: 2022_08_31_201957) do
 
   create_table "users", primary_key: "person_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
+    t.string "password_recovery_digest"
     t.boolean "voided", default: false
     t.string "void_reason"
     t.datetime "date_voided"

@@ -5,7 +5,7 @@ class Api::V1::AuthenticationController < ActionController::API
   def login
     auth_token = authenticate_user
     if auth_token
-      json_response(auth_token: JsonWebToken.encode({person_id: auth_token.person_id, name: auth_token.person.name}))
+      json_response(auth_token: JsonWebToken.encode({ person_id: auth_token.person_id, name: auth_token.person.name }))
     else
       json_response({ message: 'Incorrect Username or Password provided' }, :unauthorized)
     end

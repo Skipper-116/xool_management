@@ -3,7 +3,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users, id: false do |t|
       t.references :person, foreign_key: true
       t.string :username
-      t.string :password
+      t.string :password_digest
+      t.string :password_recovery_digest
       t.boolean :voided, default: false
       t.string :void_reason
       t.datetime :date_voided, null: true
