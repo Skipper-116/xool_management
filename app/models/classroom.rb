@@ -1,2 +1,2 @@
-class Classroom < ApplicationRecord
+class Classroom < VoidableRecord
 end

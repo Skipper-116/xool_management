@@ -3,7 +3,7 @@
 # This class is used to model a voidable record
 class VoidableRecord < ApplicationRecord
   self.abstract_class = true
-  
+
   include Voidable
 
   default_scope { where(voided: 0) }

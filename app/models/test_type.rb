@@ -1,2 +1,2 @@
-class TestType < ApplicationRecord
+class TestType < VoidableRecords
 end

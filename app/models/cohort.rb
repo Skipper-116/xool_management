@@ -1,2 +1,2 @@
-class Cohort < ApplicationRecord
+class Cohort < VoidableRecord
 end

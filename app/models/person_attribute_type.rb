@@ -1,2 +1,2 @@
-class PersonAttributeType < ApplicationRecord
+class PersonAttributeType < VoidableRecord
 end

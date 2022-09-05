@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # This class is used to model a person in the system
-class Person < ApplicationRecord
+class Person < VoidableRecord
   belongs_to :gender
   # has one person_name
   has_one :person_name, dependent: :destroy

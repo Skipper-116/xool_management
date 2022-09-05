@@ -1,2 +1,2 @@
-class RelationshipType < ApplicationRecord
+class RelationshipType < VoidableRecord
 end

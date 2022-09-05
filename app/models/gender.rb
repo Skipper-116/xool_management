@@ -1,2 +1,2 @@
-class Gender < ApplicationRecord
+class Gender < VoidableRecord
 end

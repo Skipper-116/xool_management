@@ -1,4 +1,4 @@
-class User < ApplicationRecord
+class User < VoidableRecord
   has_secure_password
   # has_secure_password :recover_password, validations: false
 

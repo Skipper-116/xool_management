@@ -1,2 +1,2 @@
-class Subject < ApplicationRecord
+class Subject < VoidableRecord
 end

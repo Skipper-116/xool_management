@@ -1,3 +1,3 @@
-class PersonName < ApplicationRecord
+class PersonName < VoidableRecord
   belongs_to :person
 end

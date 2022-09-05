@@ -1,4 +1,4 @@
-class ClassroomStudent < ApplicationRecord
+class ClassroomStudent < VoidableRecord
   belongs_to :classroom
   belongs_to :cohort_term
   belongs_to :person
