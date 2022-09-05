@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_201957) do
+ActiveRecord::Schema.define(version: 2022_09_05_142920) do
 
   create_table "classroom_facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -251,6 +251,41 @@ ActiveRecord::Schema.define(version: 2022_08_31_201957) do
     t.index ["subject_id"], name: "index_teacher_subjects_on_subject_id"
   end
 
+  create_table "test_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "classroom_id"
+    t.bigint "cohort_term_id"
+    t.bigint "subject_id"
+    t.bigint "person_id"
+    t.string "title"
+    t.text "content"
+    t.string "other_resources"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "results_available"
+    t.boolean "voided", default: false
+    t.string "void_reason"
+    t.datetime "date_voided"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_test_records_on_classroom_id"
+    t.index ["cohort_term_id"], name: "index_test_records_on_cohort_term_id"
+    t.index ["person_id"], name: "index_test_records_on_person_id"
+    t.index ["subject_id"], name: "index_test_records_on_subject_id"
+  end
+
+  create_table "test_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "test_records_id"
+    t.bigint "person_id"
+    t.float "grade"
+    t.boolean "voided", default: false
+    t.string "void_reason"
+    t.datetime "date_voided"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_test_results_on_person_id"
+    t.index ["test_records_id"], name: "index_test_results_on_test_records_id"
+  end
+
   create_table "test_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -311,6 +346,12 @@ ActiveRecord::Schema.define(version: 2022_08_31_201957) do
   add_foreign_key "teacher_registries", "people", column: "captured_by"
   add_foreign_key "teacher_subjects", "people"
   add_foreign_key "teacher_subjects", "subjects"
+  add_foreign_key "test_records", "classrooms"
+  add_foreign_key "test_records", "cohort_terms"
+  add_foreign_key "test_records", "people"
+  add_foreign_key "test_records", "subjects"
+  add_foreign_key "test_results", "people"
+  add_foreign_key "test_results", "test_records", column: "test_records_id"
   add_foreign_key "user_roles", "people"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "users", "people"
