@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      resources :test_records
       resources :test_types
       resources :teacher_subjects
       resources :subjects
