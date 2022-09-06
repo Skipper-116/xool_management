@@ -6,7 +6,7 @@ class Api::V1::AuthenticationController < ActionController::API
     auth_token = authenticate_user
     if auth_token
       json_response(auth_token: JsonWebToken.encode({ person_id: EncryptorDecryptor.encrypt(auth_token.person_id), name: auth_token.person.name,
-                                                      roles: auth_token.roles.map(&:name) }, request.remote_ip))
+                                                      roles: auth_token.roles.map(&:name), username: auth_params[:username] }, request.remote_ip))
     else
       json_response({ message: 'Incorrect Username or Password provided' }, :unauthorized)
     end
