@@ -8,7 +8,7 @@
 
 Gender.create([{ name: 'Male', description: 'Human with male genitals' },
                { name: 'Female', description: 'Human with female genitals' },
-               { name: 'Artificial Intelligence', description: 'The system robot', voided: true}])
+               { name: 'Artificial Intelligence', description: 'The system robot' }])
 
 Role.create([{ name: 'Administrator', description: 'Most likely the IT personnel' },
              { name: 'Head Teacher', description: 'Head teacher or Principal' },
@@ -23,3 +23,5 @@ Person.create(birthdate: Date.today, gender: Gender.find_by_name('Artificial Int
 PersonName.create(given_name: 'Super', family_name: 'User', person: Person.first)
 User.create(username: 'superuser', password: 'password', person: Person.first)
 UserRole.create(person: Person.first, role: Role.first)
+
+RelationshipType.create(a_is_to_b: 'Father', b_is_to_a: 'Son', description: 'Father to son relationship')
