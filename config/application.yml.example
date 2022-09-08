@@ -1,0 +1,51 @@
+development:
+  jwt_key: (xf+7C!]zG(AW8Un
+  session_hrs: 24
+  expiry_min: 10
+  generate_password: true
+  send_emails: true
+  password_length: 8
+  front_end: http://localhost:3000
+  log_activity: false
+  MAIL_HOST_ADDRESS: 'egpaf.com'
+  MAIL_PORT: 465
+  MAIL_DOMAIN: 'egpaf.com'
+  MAIL_AUTHENTICATION: 'plain'
+  MAIL_ENABLE_STARTTLS_AUTO: true
+  MAIL_USER_NAME: 'no-reply@egpaf.com'
+  MAIL_PASSWORD: 'insane_password'
+  error_msg: 'An error occured while processing your request. If this problem persist please contact the administrator'
+test:
+  jwt_key: (xf+7C!]zG(AW8Un
+  session_hrs: 24
+  expiry_min: 10
+  generate_password: true
+  send_emails: true
+  password_length: 8
+  front_end: http://localhost:3000
+  log_activity: false
+  MAIL_HOST_ADDRESS: 'egpaf.com'
+  MAIL_PORT: 465
+  MAIL_DOMAIN: 'egpaf.com'
+  MAIL_AUTHENTICATION: 'plain'
+  MAIL_ENABLE_STARTTLS_AUTO: true
+  MAIL_USER_NAME: 'no-reply@egpaf.com'
+  MAIL_PASSWORD: 'insane_password'
+  error_msg: 'An error occured while processing your request. If this problem persist please contact the administrator'
+production:
+  jwt_key: (xf+7C!]zG(AW8Un
+  session_hrs: 24
+  expiry_min: 10
+  generate_password: true
+  send_emails: true
+  front_end: http://localhost:3000
+  log_activity: false
+  MAIL_HOST_ADDRESS: 'egpaf.com'
+  MAIL_PORT: 465
+  MAIL_DOMAIN: 'egpaf.com'
+  MAIL_AUTHENTICATION: 'plain'
+  MAIL_ENABLE_STARTTLS_AUTO: true
+  MAIL_USER_NAME: 'no-reply@egpaf.com'
+  MAIL_PASSWORD: 'insane_password'
+  password_length: 8
+  error_msg: 'An error occured while processing your request. If this problem persist please contact the administrator'
