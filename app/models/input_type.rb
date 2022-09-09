@@ -1,2 +1,2 @@
-class InputType < ApplicationRecord
+class InputType < VoidableRecord
 end
