@@ -3,13 +3,23 @@
 # Person service class
 class PersonService
   def self.create_person(params)
-    person = Person.create(params[:person_params])
-    roles_params.each do |role|
-      person.roles << Role.find(role)
+    Person.transaction do
+      common_create(params)
+      process_student(person, params[:pupils])
     end
-    user = User.create(user_params)
-
     person
+  end
+
+  def self.common_create(params)
+    person = Person.create(params[:person_params])
+    UserRoleService.create_user_roles(person, params[:roles])
+  end
+  
+  def self.process_student(person, pupils)
+    pupils.each do |pupil|
+      student = common_create(pupil)
+      RelationshipService.create_relationship(person.id, student.id, pupil[:relationship_type])
+    end
   end
 
   def self.update_person(person, person_params)

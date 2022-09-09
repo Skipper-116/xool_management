@@ -100,6 +100,16 @@ ActiveRecord::Schema.define(version: 2022_09_05_142920) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "input_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "pattern"
+    t.boolean "voided", default: false
+    t.string "void_reason"
+    t.datetime "date_voided"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "birthdate"
     t.bigint "gender_id"
@@ -115,11 +125,14 @@ ActiveRecord::Schema.define(version: 2022_09_05_142920) do
   create_table "person_attribute_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.boolean "is_required", default: false
+    t.bigint "input_types_id"
     t.boolean "voided", default: false
     t.string "void_reason"
     t.datetime "date_voided"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["input_types_id"], name: "index_person_attribute_types_on_input_types_id"
   end
 
   create_table "person_attributes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -330,6 +343,7 @@ ActiveRecord::Schema.define(version: 2022_09_05_142920) do
   add_foreign_key "classroom_teachers", "people"
   add_foreign_key "cohort_terms", "cohorts"
   add_foreign_key "people", "genders"
+  add_foreign_key "person_attribute_types", "input_types", column: "input_types_id"
   add_foreign_key "person_attributes", "people"
   add_foreign_key "person_attributes", "person_attribute_types"
   add_foreign_key "person_names", "people"

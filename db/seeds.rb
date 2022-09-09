@@ -7,37 +7,33 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # these are the input types that are used to create the person attributes
-InputType.create(name: 'text', pattern: '^[a-zA-Z0-9_]*$', voided: false)
-InputType.create(name: 'number', pattern: '^[0-9]*$', voided: false)
-InputType.create(name: 'date', pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', voided: false)
-InputType.create(name: 'email', pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', voided: false)
-InputType.create(name: 'textarea', pattern: '^[a-zA-Z0-9_]*$', voided: false)
-InputType.create(name: 'select', voided: false)
-InputType.create(name: 'tel', pattern: '^[0-9]{10}$', voided: false)
-InputType.create(name: 'radio', voided: false)
-InputType.create(name: 'checkbox', voided: false)
-InputType.create(name: 'file', voided: false)
-InputType.create(name: 'month', voided: false)
-InputType.create(name: 'week', voided: false)
-InputType.create(name: 'time', voided: false)
-InputType.create(name: 'datetime-local', pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$', voided: false)
-InputType.create(name: 'url', pattern: '^(http|https)://[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', voided: false)
-InputType.create(name: 'image', voided: false)
-InputType.create(name: 'color', voided: false)
+InputType.create(name: 'text', pattern: '^[a-zA-Z0-9_]*$')
+InputType.create(name: 'number', pattern: '^[0-9]*$')
+InputType.create(name: 'date', pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+InputType.create(name: 'email', pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
+InputType.create(name: 'textarea', pattern: '^[a-zA-Z0-9_]*$')
+InputType.create(name: 'select')
+InputType.create(name: 'tel', pattern: '^[0-9]{10}$')
+InputType.create(name: 'radio')
+InputType.create(name: 'checkbox')
+InputType.create(name: 'file')
+InputType.create(name: 'month')
+InputType.create(name: 'week')
+InputType.create(name: 'time')
+InputType.create(name: 'datetime-local', pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$')
+InputType.create(name: 'url', pattern: '^(http|https)://[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
+InputType.create(name: 'image')
+InputType.create(name: 'color')
 
 # these are the person attributes that are used to create the person attributes
-PersonAttributeType.create(name: 'Email Address', description: 'Email Address', is_required: false, input_type_id: 4,
-                           voided: false)
-PersonAttributeType.create(name: 'Phone Number', description: 'Phone Number', is_required: true, input_type_id: 7,
-                           voided: false)
+PersonAttributeType.create(name: 'Email Address', description: 'Email Address', is_required: false, input_types_id: 4)
+PersonAttributeType.create(name: 'Phone Number', description: 'Phone Number', is_required: true, input_types_id: 7)
 PersonAttributeType.create(name: 'Physical Address', description: 'Physical Address', is_required: false,
-                           input_type_id: 1, voided: false)
-PersonAttributeType.create(name: 'Postal Address', description: 'Postal Address', is_required: false, input_type_id: 1,
-                           voided: false)
+                           input_types_id: 1)
+PersonAttributeType.create(name: 'Postal Address', description: 'Postal Address', is_required: false, input_types_id: 1)
 PersonAttributeType.create(name: 'Education', description: 'Highest education attained', is_required: false,
-                           input_type_id: 1, voided: false)
-PersonAttributeType.create(name: 'Occupation', description: 'Occupation', is_required: false, input_type_id: 1,
-                           voided: false)
+                           input_types_id: 1)
+PersonAttributeType.create(name: 'Occupation', description: 'Occupation', is_required: false, input_types_id: 1)
 
 Gender.create([{ name: 'Male', description: 'Human with male genitals' },
                { name: 'Female', description: 'Human with female genitals' },
