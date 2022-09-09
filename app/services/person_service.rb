@@ -12,7 +12,13 @@ class PersonService
 
   def common_create(params)
     person = Person.create(params[:person_params])
-    User.create(username: params[:username], password: SecureRandom.base64[0..7])
+    params[:person_name_params][:person_id] = person.id
+    PersonName.create(params[:person_name_params])
+    PersonAttributeService.new.create_attribute(person, params[:person_attributes])
+    User.create(
+      username: params[:username] || find_user_email(person) || person.id,
+      password: SecureRandom.base64[0..7]
+    )
     UserRoleService.create_user_roles(person, params[:roles])
   end
 
@@ -23,12 +29,9 @@ class PersonService
     end
   end
 
-  def self.update_person(person, person_params)
-    person.update(person_params)
-    person
-  end
+  private
 
-  def self.destroy_person(person)
-    person.destroy
+  def find_user_email(person)
+    person.person_attributes.where(name: 'Email Address')&.first&.attribute_value
   end
 end
