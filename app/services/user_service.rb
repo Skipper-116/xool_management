@@ -11,20 +11,15 @@ class UserService
 
   def create_user(person, username)
     password = generate_password
-    email = find_user_email(person)
     user = User.create(
-      person: person,
-      username: username || email || person.id,
-      password: password
+      person:,
+      password:,
+      username: username || person.email || person.id
     )
-    @mailable = { user: user, password: password } unless email.blank?
+    @mailable = { user:, password: } unless email.blank?
   end
 
   private
-
-  def find_user_email(person)
-    person.person_attributes.where(name: 'Email Address')&.first&.attribute_value
-  end
 
   def generate_password
     SecureRandom.base64[0..7]
