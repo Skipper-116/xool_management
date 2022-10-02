@@ -2,82 +2,81 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_05_142920) do
-
-  create_table "classroom_facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2022_10_02_100702) do
+  create_table "classroom_facilities", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.float "quantity"
     t.bigint "classroom_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["classroom_id"], name: "index_classroom_facilities_on_classroom_id"
   end
 
-  create_table "classroom_students", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "classroom_students", charset: "utf8", force: :cascade do |t|
     t.bigint "classroom_id"
     t.bigint "cohort_term_id"
     t.bigint "person_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["classroom_id"], name: "index_classroom_students_on_classroom_id"
     t.index ["cohort_term_id"], name: "index_classroom_students_on_cohort_term_id"
     t.index ["person_id"], name: "index_classroom_students_on_person_id"
   end
 
-  create_table "classroom_teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "classroom_teachers", charset: "utf8", force: :cascade do |t|
     t.bigint "classroom_id"
     t.bigint "cohort_term_id"
     t.bigint "person_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["classroom_id"], name: "index_classroom_teachers_on_classroom_id"
     t.index ["cohort_term_id"], name: "index_classroom_teachers_on_cohort_term_id"
     t.index ["person_id"], name: "index_classroom_teachers_on_person_id"
   end
 
-  create_table "classrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "classrooms", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.float "space"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "cohort_terms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "cohort_terms", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
     t.date "end_date"
     t.bigint "cohort_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["cohort_id"], name: "index_cohort_terms_on_cohort_id"
   end
 
-  create_table "cohorts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "cohorts", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "short_name"
     t.date "start_date"
@@ -85,70 +84,70 @@ ActiveRecord::Schema.define(version: 2022_09_05_142920) do
     t.string "description"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "genders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "genders", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "input_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "input_types", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "pattern"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "people", charset: "utf8", force: :cascade do |t|
     t.date "birthdate"
     t.bigint "gender_id"
     t.boolean "bithdate_estimated"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["gender_id"], name: "index_people_on_gender_id"
   end
 
-  create_table "person_attribute_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "person_attribute_types", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.boolean "is_required", default: false
     t.bigint "input_types_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["input_types_id"], name: "index_person_attribute_types_on_input_types_id"
   end
 
-  create_table "person_attributes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "person_attributes", charset: "utf8", force: :cascade do |t|
     t.bigint "person_id"
     t.bigint "person_attribute_type_id"
     t.string "attribute_value"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["person_attribute_type_id"], name: "index_person_attributes_on_person_attribute_type_id"
     t.index ["person_id"], name: "index_person_attributes_on_person_id"
   end
 
-  create_table "person_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "person_names", charset: "utf8", force: :cascade do |t|
     t.string "given_name"
     t.string "family_name"
     t.string "maiden_name"
@@ -156,59 +155,59 @@ ActiveRecord::Schema.define(version: 2022_09_05_142920) do
     t.bigint "person_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["person_id"], name: "index_person_names_on_person_id"
   end
 
-  create_table "profile_pictures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "profile_pictures", charset: "utf8", force: :cascade do |t|
     t.string "image_url"
     t.bigint "person_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["person_id"], name: "index_profile_pictures_on_person_id"
   end
 
-  create_table "relationship_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "relationship_types", charset: "utf8", force: :cascade do |t|
     t.string "a_is_to_b"
     t.string "b_is_to_a"
     t.string "description"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "relationships", charset: "utf8", force: :cascade do |t|
     t.bigint "person_a", null: false
     t.bigint "relationship_type_id"
     t.bigint "person_b", null: false
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["person_a"], name: "fk_rails_a2033e96cc"
     t.index ["person_b"], name: "fk_rails_cdb1b80acf"
     t.index ["relationship_type_id"], name: "index_relationships_on_relationship_type_id"
   end
 
-  create_table "roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "roles", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "student_registries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "student_registries", charset: "utf8", force: :cascade do |t|
     t.bigint "classroom_id"
     t.bigint "cohort_term_id"
     t.bigint "person_id"
@@ -217,26 +216,27 @@ ActiveRecord::Schema.define(version: 2022_09_05_142920) do
     t.string "absent_reason"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "obs_datetime"
     t.index ["captured_by"], name: "fk_rails_0c2db770b6"
     t.index ["classroom_id"], name: "index_student_registries_on_classroom_id"
     t.index ["cohort_term_id"], name: "index_student_registries_on_cohort_term_id"
     t.index ["person_id"], name: "index_student_registries_on_person_id"
   end
 
-  create_table "subjects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "subjects", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "desciption"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "teacher_registries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "teacher_registries", charset: "utf8", force: :cascade do |t|
     t.bigint "cohort_id"
     t.bigint "person_id"
     t.bigint "captured_by"
@@ -244,27 +244,27 @@ ActiveRecord::Schema.define(version: 2022_09_05_142920) do
     t.string "absent_reason"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["captured_by"], name: "fk_rails_efe3bb3902"
     t.index ["cohort_id"], name: "index_teacher_registries_on_cohort_id"
     t.index ["person_id"], name: "index_teacher_registries_on_person_id"
   end
 
-  create_table "teacher_subjects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "teacher_subjects", charset: "utf8", force: :cascade do |t|
     t.bigint "person_id"
     t.bigint "subject_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["person_id"], name: "index_teacher_subjects_on_person_id"
     t.index ["subject_id"], name: "index_teacher_subjects_on_subject_id"
   end
 
-  create_table "test_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "test_records", charset: "utf8", force: :cascade do |t|
     t.bigint "classroom_id"
     t.bigint "cohort_term_id"
     t.bigint "subject_id"
@@ -272,65 +272,65 @@ ActiveRecord::Schema.define(version: 2022_09_05_142920) do
     t.string "title"
     t.text "content"
     t.string "other_resources"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.datetime "results_available"
+    t.datetime "start_date", precision: nil
+    t.datetime "end_date", precision: nil
+    t.datetime "results_available", precision: nil
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["classroom_id"], name: "index_test_records_on_classroom_id"
     t.index ["cohort_term_id"], name: "index_test_records_on_cohort_term_id"
     t.index ["person_id"], name: "index_test_records_on_person_id"
     t.index ["subject_id"], name: "index_test_records_on_subject_id"
   end
 
-  create_table "test_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "test_results", charset: "utf8", force: :cascade do |t|
     t.bigint "test_records_id"
     t.bigint "person_id"
     t.float "grade"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["person_id"], name: "index_test_results_on_person_id"
     t.index ["test_records_id"], name: "index_test_results_on_test_records_id"
   end
 
-  create_table "test_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "test_types", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.float "scale"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "user_roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "user_roles", charset: "utf8", force: :cascade do |t|
     t.bigint "role_id"
     t.bigint "person_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["person_id"], name: "index_user_roles_on_person_id"
     t.index ["role_id"], name: "index_user_roles_on_role_id"
   end
 
-  create_table "users", primary_key: "person_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", primary_key: "person_id", id: :bigint, default: nil, charset: "utf8", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
     t.string "password_recovery_digest"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date_voided", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["person_id"], name: "index_users_on_person_id"
   end
 
