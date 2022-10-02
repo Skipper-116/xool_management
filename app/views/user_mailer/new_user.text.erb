@@ -1,10 +1,13 @@
-Hi <%= @user[:person][:name] %>
+Hi <%= @user.person.name %>
 
 Welcome to the school management system your login credentials are provided below. 
-You are required to change the password as this is system generated.
+You are required to change the password as this is a system generated password.
 
-Username: <%= @user[:username] %>
+Username: <%= @user.username %>
 Password: <%= @password %>
 
-Regards
+To login to this site, just click the button below
+<%= @url %>
+
+Thank you for joining <%= @school %>
 Admin

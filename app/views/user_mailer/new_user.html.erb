@@ -1,10 +1,13 @@
 <div class='container'>
     <h6>Hi <%= @user.person.name %></h6>
-    <p>Welcome to the school management system your login credentials are provided below. You are required to change the password as this is system generated.</p>
+    <p>Welcome to the School Management System your login credentials are provided below. You are required to change the password as this is a system generated password.</p>
     <br/>
     <p>Username: <%= @user.username %></p>
     <p>Password: <%= @password %></p>
     <br/>
-    <p>Regards</p>
+    <p>To login to the site, just click the button below</p>
+    <!-- create a button for the link  use styles -->
+    <a href="<%= @url %>" style=" background-color: #24a0ed; border: none;  color: white; padding: 12px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 25px;" target="_blank">Login</a>
+    <p>Thank you for joining <b><%= @school %></b></p>
     <p>Admin</p>
 </div>
