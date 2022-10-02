@@ -2,6 +2,12 @@
 
 # Person service class
 class PersonService
+  attr_accessor :mailable
+
+  def initialize
+    @mailable = []
+  end
+
   def create_person(params)
     Person.transaction do
       common_create(params)
@@ -10,15 +16,14 @@ class PersonService
     person
   end
 
+  private
+
   def common_create(params)
     person = Person.create(params[:person_params])
     params[:person_name_params][:person_id] = person.id
     PersonName.create(params[:person_name_params])
     PersonAttributeService.new.create_attribute(person, params[:person_attributes])
-    User.create(
-      username: params[:username] || find_user_email(person) || person.id,
-      password: SecureRandom.base64[0..7]
-    )
+    @mailable << UserService.new.create_user(person, params[:username]).mailable
     UserRoleService.create_user_roles(person, params[:roles])
   end
 
@@ -27,11 +32,5 @@ class PersonService
       student = common_create(pupil)
       RelationshipService.new.create_relationship(person.id, student.id, pupil[:relationship_type])
     end
-  end
-
-  private
-
-  def find_user_email(person)
-    person.person_attributes.where(name: 'Email Address')&.first&.attribute_value
   end
 end
