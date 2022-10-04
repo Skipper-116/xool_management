@@ -1,0 +1,161 @@
+---
+openapi: 3.0.1
+info:
+  title: Maphunziro API
+  version: v1
+paths:
+  "/api/v1/people":
+    get:
+      summary: list people
+      tags:
+      - People
+      responses:
+        '200':
+          description: people found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    birthdate:
+                      type: string
+                    gender_id:
+                      type: integer
+                    bithdate_estimated:
+                      type: boolean
+                      nullable: true
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+    post:
+      summary: create person
+      tags:
+      - People
+      parameters: []
+      responses:
+        '201':
+          description: successful
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                birthdate:
+                  type: string
+                gender_id:
+                  type: integer
+                bithdate_estimated:
+                  type: boolean
+              required:
+              - birthdate
+              - gender_id
+              - bithdate_estimated
+  "/api/v1/people/{id}":
+    get:
+      summary: show person
+      tags:
+      - People
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  birthdate:
+                    type: string
+                  gender_id:
+                    type: integer
+                  bithdate_estimated:
+                    type: boolean
+                    nullable: true
+                  voided:
+                    type: boolean
+                  void_reason:
+                    type: string
+                    nullable: true
+                  date_voided:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - birthdate
+                - gender_id
+                - bithdate_estimated
+                - voided
+                - created_at
+                - updated_at
+        '404':
+          description: not found
+    put:
+      summary: update person
+      tags:
+      - People
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                birthdate:
+                  type: string
+                gender_id:
+                  type: integer
+                bithdate_estimated:
+                  type: boolean
+              required:
+              - birthdate
+              - gender_id
+              - bithdate_estimated
+    delete:
+      summary: delete person
+      tags:
+      - People
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+servers:
+- url: "{defaultHost}"
+  variables:
+    defaultHost:
+      default: http://localhost:3000

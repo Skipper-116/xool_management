@@ -2,9 +2,14 @@
 
 # This class is used to model a person in the system
 class Person < VoidableRecord
+  # birthdate is required and must be in the past
+  validates :birthdate, presence: true
+  validate :birthdate_should_be_in_the_past
+  # gender_id is required
+  validates :gender_id, presence: true
 
   # Relationships
-  belongs_to :gender
+  belongs_to :gender, optional: true
   # has one person_name
   has_one :person_name, dependent: :destroy
   # has many person_attributes
@@ -17,6 +22,10 @@ class Person < VoidableRecord
   has_many :relationships, dependent: :destroy, foreign_key: :person_a
 
   # custom methods
+  def birthdate_should_be_in_the_past
+    errors.add(:birthdate, 'cannot be in the future') if
+      !birthdate.blank? && birthdate > Date.today
+  end
 
   def name
     @name ||= "#{person_name.given_name} #{person_name.family_name}"

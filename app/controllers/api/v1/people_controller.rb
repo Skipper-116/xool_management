@@ -1,5 +1,5 @@
 class Api::V1::PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :update, :destroy]
+  before_action :set_person, only: %i[show update destroy]
 
   # GET /people
   def index
@@ -10,7 +10,7 @@ class Api::V1::PeopleController < ApplicationController
 
   # GET /people/1
   def show
-    render json: @person
+    render json: @person, status: @person ? :ok : :not_found
   end
 
   # POST /people
@@ -18,7 +18,7 @@ class Api::V1::PeopleController < ApplicationController
     @person = Person.new(person_params)
 
     if @person.save
-      render json: @person, status: :created, location: @person
+      render json: @person, status: :created
     else
       render json: @person.errors, status: :unprocessable_entity
     end
@@ -35,17 +35,19 @@ class Api::V1::PeopleController < ApplicationController
 
   # DELETE /people/1
   def destroy
-    @person.destroy
+    @person&.void('Removed from System')
+    @person ? render(json: { message: 'Removed successfully' }, status: :ok) : render(json: @person, status: :not_found)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_person
-      @person = Person.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def person_params
-      params.require(:person).permit(:birthdate, :gender_id, :bithdate_estimated)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_person
+    @person = Person.where(id: params[:id])&.first
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def person_params
+    params.require(:person).permit(:birthdate, :gender_id, :bithdate_estimated)
+  end
 end
