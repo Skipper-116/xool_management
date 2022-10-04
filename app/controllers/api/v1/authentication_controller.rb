@@ -25,10 +25,10 @@ class Api::V1::AuthenticationController < ActionController::API
   end
 
   def auth_params
-    params.permit(:username, :password)
+    params.require(:authentication).permit(:username, :password)
   end
 
   def json_response(object, status = :ok)
-    render json: object, status: status
+    render json: object, status:
   end
 end

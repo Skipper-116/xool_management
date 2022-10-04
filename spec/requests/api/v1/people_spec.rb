@@ -19,7 +19,7 @@ RSpec.describe 'People Management', type: :request do
               id: { type: :integer },
               birthdate: { type: :string },
               gender_id: { type: :integer },
-              bithdate_estimated: { type: :boolean, nullable: true },
+              birthdate_estimated: { type: :boolean, nullable: true },
               created_at: { type: :string },
               updated_at: { type: :string }
             }
@@ -36,13 +36,13 @@ RSpec.describe 'People Management', type: :request do
           type: :object, properties: {
             birthdate: { type: :string },
             gender_id: { type: :integer },
-            bithdate_estimated: { type: :boolean }
+            birthdate_estimated: { type: :boolean }
           },
-          required: %w[birthdate gender_id bithdate_estimated]
+          required: %w[birthdate gender_id birthdate_estimated]
         }
 
         response(201, 'successful') do
-          let(:person) { { birthdate: '2019-01-01', gender_id: 1, bithdate_estimated: true } }
+          let(:person) { { birthdate: '2019-01-01', gender_id: 1, birthdate_estimated: true } }
           run_test!
         end
 
@@ -64,15 +64,15 @@ RSpec.describe 'People Management', type: :request do
             id: { type: :integer },
             birthdate: { type: :string },
             gender_id: { type: :integer },
-            bithdate_estimated: { type: :boolean, nullable: true },
+            birthdate_estimated: { type: :boolean, nullable: true },
             voided: { type: :boolean },
             void_reason: { type: :string, nullable: true },
             date_voided: { type: :string, nullable: true },
             created_at: { type: :string },
             updated_at: { type: :string }
-          }, required: %w[id birthdate gender_id bithdate_estimated voided created_at updated_at]
+          }, required: %w[id birthdate gender_id birthdate_estimated voided created_at updated_at]
 
-          let(:id) { Person.create!(birthdate: '2022-09-01'.to_date, gender_id: 1, bithdate_estimated: 0).id }
+          let(:id) { Person.create!(birthdate: '2022-09-01'.to_date, gender_id: 1, birthdate_estimated: 0).id }
           run_test!
         end
 
@@ -91,14 +91,14 @@ RSpec.describe 'People Management', type: :request do
           type: :object, properties: {
             birthdate: { type: :string },
             gender_id: { type: :integer },
-            bithdate_estimated: { type: :boolean }
-          }, required: %w[birthdate gender_id bithdate_estimated]
+            birthdate_estimated: { type: :boolean }
+          }, required: %w[birthdate gender_id birthdate_estimated]
         }
 
-        person = Person.create!(birthdate: '2022-09-01'.to_date, gender_id: 1, bithdate_estimated: 0)
+        person = Person.create!(birthdate: '2022-09-01'.to_date, gender_id: 1, birthdate_estimated: 0)
         response(200, 'successful') do
           let(:id) { person.id }
-          let(:person) { { birthdate: '1991-01-01', gender_id: 2, bithdate_estimated: 1 } }
+          let(:person) { { birthdate: '1991-01-01', gender_id: 2, birthdate_estimated: 1 } }
 
           after do |example|
             example.metadata[:response][:content] = {
@@ -112,7 +112,7 @@ RSpec.describe 'People Management', type: :request do
 
         response(422, 'invalid request') do
           let(:id) { person.id }
-          let(:person) { { birthdate: '2023-09-01'.to_date, gender_id: 1, bithdate_estimated: 0 } }
+          let(:person) { { birthdate: '2023-09-01'.to_date, gender_id: 1, birthdate_estimated: 0 } }
           run_test!
         end
 
@@ -127,7 +127,7 @@ RSpec.describe 'People Management', type: :request do
         produces 'application/json'
         parameter name: 'id', in: :path, type: :string
 
-        person = Person.create!(birthdate: '2022-09-01'.to_date, gender_id: 1, bithdate_estimated: 0)
+        person = Person.create!(birthdate: '2022-09-01'.to_date, gender_id: 1, birthdate_estimated: 0)
         response(200, 'successful') do
           let(:id) { person.id }
           run_test!
