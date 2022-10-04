@@ -4,6 +4,48 @@ info:
   title: Maphunziro API
   version: v1
 paths:
+  "/api/v1/auth/login":
+    post:
+      summary: login authentication
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auth_token:
+                    type: string
+                required:
+                - auth_token
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - message
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - password
   "/api/v1/people":
     get:
       summary: list people
@@ -25,7 +67,7 @@ paths:
                       type: string
                     gender_id:
                       type: integer
-                    bithdate_estimated:
+                    birthdate_estimated:
                       type: boolean
                       nullable: true
                     created_at:
@@ -52,12 +94,12 @@ paths:
                   type: string
                 gender_id:
                   type: integer
-                bithdate_estimated:
+                birthdate_estimated:
                   type: boolean
               required:
               - birthdate
               - gender_id
-              - bithdate_estimated
+              - birthdate_estimated
   "/api/v1/people/{id}":
     get:
       summary: show person
@@ -83,7 +125,7 @@ paths:
                     type: string
                   gender_id:
                     type: integer
-                  bithdate_estimated:
+                  birthdate_estimated:
                     type: boolean
                     nullable: true
                   voided:
@@ -102,7 +144,7 @@ paths:
                 - id
                 - birthdate
                 - gender_id
-                - bithdate_estimated
+                - birthdate_estimated
                 - voided
                 - created_at
                 - updated_at
@@ -133,12 +175,12 @@ paths:
                   type: string
                 gender_id:
                   type: integer
-                bithdate_estimated:
+                birthdate_estimated:
                   type: boolean
               required:
               - birthdate
               - gender_id
-              - bithdate_estimated
+              - birthdate_estimated
     delete:
       summary: delete person
       tags:

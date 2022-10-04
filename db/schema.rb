@@ -112,8 +112,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_02_100702) do
   create_table "people", charset: "utf8", force: :cascade do |t|
     t.date "birthdate"
     t.bigint "gender_id"
-    t.boolean "bithdate_estimated"
-    t.boolean "voided", default: false
+    t.boolean "birthdate_estimated", default: false, null: false
+    t.boolean "voided", default: false, null: false
     t.string "void_reason"
     t.datetime "date_voided", precision: nil
     t.datetime "created_at", precision: nil, null: false
