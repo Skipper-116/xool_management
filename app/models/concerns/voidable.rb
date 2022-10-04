@@ -15,7 +15,7 @@ module Voidable
     clazz._update_voidable_field self, :voided, 1
     clazz._update_voidable_field self, :date_voided, Time.now
     clazz._update_voidable_field self, :void_reason, reason
-    clazz._update_voidable_field self, :voided_by, user ? user.user_id : nil
+    # clazz._update_voidable_field self, :voided_by, user ? user.user_id : nil
 
     save!(validate: false)
 
@@ -49,13 +49,11 @@ module Voidable
     #       remap_voidable_interface(voided: :retired, date_voided: :date_retired)
     #    end
     def remap_voidable_interface(voided: :voided, date_voided: :date_voided,
-                                 void_reason: :void_reason,
-                                 voided_by: :voided_by)
+                                 void_reason: :void_reason)
       @interface = {
         voided: voided,
         date_voided: date_voided,
-        void_reason: void_reason,
-        voided_by: voided_by
+        void_reason: void_reason
       }
     end
 
