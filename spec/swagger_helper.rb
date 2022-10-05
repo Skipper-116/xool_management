@@ -64,8 +64,8 @@ RSpec.configure do |config|
               voided: { type: :boolean },
               void_reason: { type: :string, nullable: true },
               date_voided: { type: :string, nullable: true },
-              created_at: { type: :string },
-              updated_at: { type: :string }
+              created_at: { type: :string, format: :date_time },
+              updated_at: { type: :string, format: :date_time }
             },
             required: %w[birthdate gender_id birthdate_estimated]
           }
