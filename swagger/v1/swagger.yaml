@@ -46,6 +46,105 @@ paths:
               required:
               - username
               - password
+  "/api/v1/classroom_facilities":
+    get:
+      summary: list classroom_facilities
+      tags:
+      - Classroom Facilities
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/classroom_facility"
+    post:
+      summary: create classroom facility i.e desks
+      tags:
+      - Classroom Facilities
+      parameters: []
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/classroom_facility"
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/classroom_facility"
+  "/api/v1/classroom_facilities/{id}":
+    get:
+      summary: show classroom_facility
+      tags:
+      - Classroom Facilities
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/classroom_facility"
+        '404':
+          description: not found
+    put:
+      summary: update classroom_facility
+      tags:
+      - Classroom Facilities
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/classroom_facility"
+    delete:
+      summary: delete classroom_facility
+      tags:
+      - Classroom Facilities
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_response"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_response"
   "/api/v1/people":
     get:
       summary: list people
@@ -196,6 +295,38 @@ paths:
           description: successful
         '404':
           description: not found
+components:
+  schemas:
+    common_response:
+      type: object
+      properties:
+        message:
+          type: string
+    classroom_facility:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: number
+          format: float
+        classroom_id:
+          type: integer
+        created_at:
+          type: string
+          format: date_time
+        updated_at:
+          type: string
+          format: date_time
+      required:
+      - name
+      - description
+      - quantity
+      - classroom_id
 servers:
 - url: "{defaultHost}"
   variables:
