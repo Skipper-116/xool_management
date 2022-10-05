@@ -37,6 +37,7 @@ RSpec.describe 'Classroom Facilities API', type: :request do
       end
 
       response(422, 'invalid request') do
+        schema '$ref' => '#/components/schemas/common_error'
         let(:classroom_facility) do
           { name: 'Classroom Facility', description: 'Classroom Facility Description', quantity: -1, classroom_id: -1 }
         end
@@ -58,6 +59,7 @@ RSpec.describe 'Classroom Facilities API', type: :request do
         run_test!
       end
       response 404, 'not found' do
+        schema '$ref' => '#/components/schemas/common_error'
         let(:id) { 'invalid' }
         run_test!
       end
@@ -78,6 +80,8 @@ RSpec.describe 'Classroom Facilities API', type: :request do
         run_test!
       end
       response 422, 'invalid request' do
+        schema '$ref' => '#/components/schemas/common_error'
+
         let(:id) { @classroom_facility.id }
         let(:classroom_facility) do
           { name: 'Classroom Facility', description: 'Classroom Facility Description', quantity: -1, classroom_id: -1 }
@@ -98,7 +102,8 @@ RSpec.describe 'Classroom Facilities API', type: :request do
         run_test!
       end
       response 404, 'not found' do
-        schema '$ref' => '#/components/schemas/common_response'
+        schema '$ref' => '#/components/schemas/common_error'
+
         let(:id) { 'invalid' }
         run_test!
       end

@@ -24,6 +24,17 @@ RSpec.configure do |config|
       paths: {},
       components: {
         schemas: {
+          common_error: {
+            type: :object,
+            properties: {
+              errors: {
+                type: :array,
+                items: {
+                  type: :string
+                }
+              }
+            }
+          },
           common_response: {
             type: :object,
             properties: {
@@ -42,6 +53,21 @@ RSpec.configure do |config|
               updated_at: { type: :string, format: :date_time }
             },
             required: %w[name description quantity classroom_id]
+          },
+          person: {
+            type: :object,
+            properties: {
+              id: { type: :integer },
+              birthdate: { type: :string },
+              gender_id: { type: :integer },
+              birthdate_estimated: { type: :boolean, nullable: true },
+              voided: { type: :boolean },
+              void_reason: { type: :string, nullable: true },
+              date_voided: { type: :string, nullable: true },
+              created_at: { type: :string },
+              updated_at: { type: :string }
+            },
+            required: %w[birthdate gender_id birthdate_estimated]
           }
         }
       },

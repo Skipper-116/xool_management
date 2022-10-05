@@ -14,16 +14,7 @@ RSpec.describe 'People Management', type: :request do
         tags TAG
         produces 'application/json'
         response(200, 'people found') do
-          schema type: :array, items: {
-            type: :object, properties: {
-              id: { type: :integer },
-              birthdate: { type: :string },
-              gender_id: { type: :integer },
-              birthdate_estimated: { type: :boolean, nullable: true },
-              created_at: { type: :string },
-              updated_at: { type: :string }
-            }
-          }
+          schema type: :array, items: { '$ref' => '#/components/schemas/person' }
           run_test!
         end
       end
@@ -32,14 +23,7 @@ RSpec.describe 'People Management', type: :request do
         tags TAG
         consumes 'application/json'
         produces 'application/json'
-        parameter name: :person, in: :body, schema: {
-          type: :object, properties: {
-            birthdate: { type: :string },
-            gender_id: { type: :integer },
-            birthdate_estimated: { type: :boolean }
-          },
-          required: %w[birthdate gender_id birthdate_estimated]
-        }
+        parameter name: :person, in: :body, schema: { '$ref' => '#/components/schemas/person' }
 
         response(201, 'successful') do
           let(:person) { { birthdate: '2019-01-01', gender_id: 1, birthdate_estimated: true } }
@@ -47,6 +31,7 @@ RSpec.describe 'People Management', type: :request do
         end
 
         response(422, 'invalid request') do
+          schema '$ref' => '#/components/schemas/common_error'
           let(:person) { { birthdate: '2019-01-01' } }
           run_test!
         end
@@ -60,23 +45,14 @@ RSpec.describe 'People Management', type: :request do
         parameter name: 'id', in: :path, type: :string
 
         response(200, 'person found') do
-          schema type: :object, properties: {
-            id: { type: :integer },
-            birthdate: { type: :string },
-            gender_id: { type: :integer },
-            birthdate_estimated: { type: :boolean, nullable: true },
-            voided: { type: :boolean },
-            void_reason: { type: :string, nullable: true },
-            date_voided: { type: :string, nullable: true },
-            created_at: { type: :string },
-            updated_at: { type: :string }
-          }, required: %w[id birthdate gender_id birthdate_estimated voided created_at updated_at]
+          schema '$ref' => '#/components/schemas/person'
 
           let(:id) { Person.create!(birthdate: '2022-09-01'.to_date, gender_id: 1, birthdate_estimated: 0).id }
           run_test!
         end
 
         response(404, 'not found') do
+          schema '$ref' => '#/components/schemas/common_error'
           let(:id) { 'invalid' }
           run_test!
         end
@@ -87,13 +63,7 @@ RSpec.describe 'People Management', type: :request do
         consumes 'application/json'
         produces 'application/json'
         parameter name: 'id', in: :path, type: :string
-        parameter name: :person, in: :body, schema: {
-          type: :object, properties: {
-            birthdate: { type: :string },
-            gender_id: { type: :integer },
-            birthdate_estimated: { type: :boolean }
-          }, required: %w[birthdate gender_id birthdate_estimated]
-        }
+        parameter name: :person, in: :body, schema: { '$ref' => '#/components/schemas/person' }
 
         person = Person.create!(birthdate: '2022-09-01'.to_date, gender_id: 1, birthdate_estimated: 0)
         response(200, 'successful') do
@@ -111,12 +81,16 @@ RSpec.describe 'People Management', type: :request do
         end
 
         response(422, 'invalid request') do
+          schema '$ref' => '#/components/schemas/common_error'
+
           let(:id) { person.id }
           let(:person) { { birthdate: '2023-09-01'.to_date, gender_id: 1, birthdate_estimated: 0 } }
           run_test!
         end
 
         response(404, 'not found') do
+          schema '$ref' => '#/components/schemas/common_error'
+
           let(:id) { 'invalid' }
           let(:person) { { birthdate: '1991-01-01' } }
         end
@@ -134,6 +108,8 @@ RSpec.describe 'People Management', type: :request do
         end
 
         response(404, 'not found') do
+          schema '$ref' => '#/components/schemas/common_error'
+
           let(:id) { 'invalid' }
           run_test!
         end
