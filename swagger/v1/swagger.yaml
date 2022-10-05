@@ -74,6 +74,10 @@ paths:
                 "$ref": "#/components/schemas/classroom_facility"
         '422':
           description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
       requestBody:
         content:
           application/json:
@@ -100,6 +104,10 @@ paths:
                 "$ref": "#/components/schemas/classroom_facility"
         '404':
           description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
     put:
       summary: update classroom_facility
       tags:
@@ -116,6 +124,10 @@ paths:
           description: successful
         '422':
           description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
       requestBody:
         content:
           application/json:
@@ -144,7 +156,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/common_response"
+                "$ref": "#/components/schemas/common_error"
   "/api/v1/people":
     get:
       summary: list people
@@ -158,21 +170,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    birthdate:
-                      type: string
-                    gender_id:
-                      type: integer
-                    birthdate_estimated:
-                      type: boolean
-                      nullable: true
-                    created_at:
-                      type: string
-                    updated_at:
-                      type: string
+                  "$ref": "#/components/schemas/person"
     post:
       summary: create person
       tags:
@@ -183,22 +181,15 @@ paths:
           description: successful
         '422':
           description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                birthdate:
-                  type: string
-                gender_id:
-                  type: integer
-                birthdate_estimated:
-                  type: boolean
-              required:
-              - birthdate
-              - gender_id
-              - birthdate_estimated
+              "$ref": "#/components/schemas/person"
   "/api/v1/people/{id}":
     get:
       summary: show person
@@ -216,39 +207,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  birthdate:
-                    type: string
-                  gender_id:
-                    type: integer
-                  birthdate_estimated:
-                    type: boolean
-                    nullable: true
-                  voided:
-                    type: boolean
-                  void_reason:
-                    type: string
-                    nullable: true
-                  date_voided:
-                    type: string
-                    nullable: true
-                  created_at:
-                    type: string
-                  updated_at:
-                    type: string
-                required:
-                - id
-                - birthdate
-                - gender_id
-                - birthdate_estimated
-                - voided
-                - created_at
-                - updated_at
+                "$ref": "#/components/schemas/person"
         '404':
           description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
     put:
       summary: update person
       tags:
@@ -264,22 +229,15 @@ paths:
           description: successful
         '422':
           description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                birthdate:
-                  type: string
-                gender_id:
-                  type: integer
-                birthdate_estimated:
-                  type: boolean
-              required:
-              - birthdate
-              - gender_id
-              - birthdate_estimated
+              "$ref": "#/components/schemas/person"
     delete:
       summary: delete person
       tags:
@@ -295,8 +253,19 @@ paths:
           description: successful
         '404':
           description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
 components:
   schemas:
+    common_error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
     common_response:
       type: object
       properties:
@@ -327,6 +296,34 @@ components:
       - description
       - quantity
       - classroom_id
+    person:
+      type: object
+      properties:
+        id:
+          type: integer
+        birthdate:
+          type: string
+        gender_id:
+          type: integer
+        birthdate_estimated:
+          type: boolean
+          nullable: true
+        voided:
+          type: boolean
+        void_reason:
+          type: string
+          nullable: true
+        date_voided:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+        updated_at:
+          type: string
+      required:
+      - birthdate
+      - gender_id
+      - birthdate_estimated
 servers:
 - url: "{defaultHost}"
   variables:
