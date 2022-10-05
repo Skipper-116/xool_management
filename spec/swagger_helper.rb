@@ -22,6 +22,29 @@ RSpec.configure do |config|
         version: 'v1'
       },
       paths: {},
+      components: {
+        schemas: {
+          common_response: {
+            type: :object,
+            properties: {
+              message: { type: :string }
+            }
+          },
+          classroom_facility: {
+            type: :object,
+            properties: {
+              id: { type: :integer },
+              name: { type: :string },
+              description: { type: :string },
+              quantity: { type: :number, format: :float },
+              classroom_id: { type: :integer },
+              created_at: { type: :string, format: :date_time },
+              updated_at: { type: :string, format: :date_time }
+            },
+            required: %w[name description quantity classroom_id]
+          }
+        }
+      },
       servers: [
         {
           url: '{defaultHost}',
