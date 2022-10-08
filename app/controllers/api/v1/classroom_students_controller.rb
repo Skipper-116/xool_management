@@ -1,5 +1,5 @@
 class Api::V1::ClassroomStudentsController < ApplicationController
-  before_action :set_classroom_student, only: [:show, :update, :destroy]
+  before_action :set_classroom_student, only: %i[show update destroy]
 
   # GET /classroom_students
   def index
@@ -18,7 +18,7 @@ class Api::V1::ClassroomStudentsController < ApplicationController
     @classroom_student = ClassroomStudent.new(classroom_student_params)
 
     if @classroom_student.save
-      render json: @classroom_student, status: :created, location: @classroom_student
+      render json: @classroom_student, status: :created
     else
       render json: @classroom_student.errors, status: :unprocessable_entity
     end
@@ -39,13 +39,14 @@ class Api::V1::ClassroomStudentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_classroom_student
-      @classroom_student = ClassroomStudent.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def classroom_student_params
-      params.require(:classroom_student).permit(:classroom_id, :cohort_term_id, :person_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_classroom_student
+    @classroom_student = ClassroomStudent.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def classroom_student_params
+    params.require(:classroom_student).permit(:classroom_id, :cohort_term_id, :person_id)
+  end
 end
