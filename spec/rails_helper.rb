@@ -64,4 +64,14 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
+
+  # Database cleaner to be used with rspec
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+    Rails.application.load_seed # loading seeds
+  end
+
+  config.after(:all) do
+    DatabaseCleaner.clean
+  end
 end

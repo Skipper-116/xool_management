@@ -6,12 +6,6 @@ TAG = 'Classroom Students'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe 'Classroom Student Endpoints', type: :request do
-  # before all tests create a classroom
-  before(:all) do
-    # rails drop database and create database
-    DatabaseCleaner.clean_with(:truncation)
-    Rails.application.load_seed
-  end
 
   let(:classroom) { create :classroom }
   let(:cohort) { create :cohort }
@@ -85,6 +79,8 @@ RSpec.describe 'Classroom Student Endpoints', type: :request do
     end
 
     delete('delete classroom_student') do
+      tags TAG
+      produces 'application/json'
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/common_response'
         let(:id) { test_classroom_student.id }

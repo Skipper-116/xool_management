@@ -161,14 +161,40 @@ paths:
   "/api/v1/classroom_students":
     get:
       summary: list classroom_students
+      tags:
+      - Classroom Students
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/classroom_student"
     post:
       summary: create classroom_student
+      tags:
+      - Classroom Students
+      parameters: []
       responses:
-        '200':
+        '201':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/classroom_student"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/classroom_student"
   "/api/v1/classroom_students/{id}":
     parameters:
     - name: id
@@ -179,24 +205,43 @@ paths:
         type: string
     get:
       summary: show classroom_student
+      tags:
+      - Classroom Students
       responses:
         '200':
           description: successful
-    patch:
-      summary: update classroom_student
-      responses:
-        '200':
-          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/classroom_student"
     put:
       summary: update classroom_student
+      tags:
+      - Classroom Students
+      parameters: []
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/classroom_student"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/classroom_student"
     delete:
       summary: delete classroom_student
+      tags:
+      - Classroom Students
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_response"
   "/api/v1/people":
     get:
       summary: list people
@@ -343,7 +388,7 @@ components:
           type: integer
         classroom_id:
           type: integer
-        cohort_id:
+        cohort_term_id:
           type: integer
         person_id:
           type: integer
@@ -361,7 +406,7 @@ components:
           "$ref": "#/components/schemas/person"
       required:
       - classroom_id
-      - cohort_id
+      - cohort_term_id
       - person_id
     classroom_teachers:
       type: object
