@@ -242,6 +242,122 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/common_response"
+  "/api/v1/classroom_teachers":
+    get:
+      summary: list classroom_teachers
+      tags:
+      - Classroom Teachers
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/classroom_teacher"
+    post:
+      summary: create classroom_teacher
+      tags:
+      - Classroom Teachers
+      parameters: []
+      responses:
+        '201':
+          description: successful
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/classroom_teacher"
+  "/api/v1/classroom_teachers/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show classroom_teacher
+      tags:
+      - Classroom Teachers
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/classroom_teacher"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
+    put:
+      summary: update classroom_teacher
+      tags:
+      - Classroom Teachers
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/classroom_teacher"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/classroom_teacher"
+    delete:
+      summary: delete classroom_teacher
+      tags:
+      - Classroom Teachers
+      parameters:
+      - name: void_reason
+        in: query
+        description: void reason
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_response"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/common_error"
   "/api/v1/people":
     get:
       summary: list people
@@ -408,7 +524,7 @@ components:
       - classroom_id
       - cohort_term_id
       - person_id
-    classroom_teachers:
+    classroom_teacher:
       type: object
       properties:
         id:
