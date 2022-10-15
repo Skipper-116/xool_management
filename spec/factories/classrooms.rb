@@ -3,9 +3,7 @@
 FactoryBot.define do
   factory :classroom do
     name { Faker::Lorem.word }
-    describe { Faker::Lorem.sentence }
-    school
-    grade
-    classroom_type
+    description { Faker::Lorem.sentence }
+    space { Faker::Number.number(digits: 2) }
   end
 end

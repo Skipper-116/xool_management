@@ -60,7 +60,7 @@ RSpec.configure do |config|
             properties: {
               id: { type: :integer },
               classroom_id: { type: :integer },
-              cohort_id: { type: :integer },
+              cohort_term_id: { type: :integer },
               person_id: { type: :integer },
               created_at: { type: :string, format: :date_time },
               updated_at: { type: :string, format: :date_time },
@@ -68,7 +68,7 @@ RSpec.configure do |config|
               cohort: { '$ref' => '#/components/schemas/cohort' },
               person: { '$ref' => '#/components/schemas/person' }
             },
-            required: %w[classroom_id cohort_id person_id]
+            required: %w[classroom_id cohort_term_id person_id]
           },
           classroom_teachers: {
             type: :object,

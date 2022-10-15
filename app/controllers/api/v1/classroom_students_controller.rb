@@ -35,7 +35,8 @@ class Api::V1::ClassroomStudentsController < ApplicationController
 
   # DELETE /classroom_students/1
   def destroy
-    @classroom_student.destroy
+    @classroom_student.void('Removed from classroom')
+    render json: { message: 'ClassroomStudent was successfully removed.' }, status: :ok 
   end
 
   private

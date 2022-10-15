@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :gender do
-    name { Faker.lorem.word }
-    description { Faker.lorem.sentence }
+    name { Faker::Lorem.word }
+    description { Faker::Lorem.sentence }
   end
 end
