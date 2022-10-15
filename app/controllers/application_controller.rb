@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
     auth_scheme = content.first
     raise ExceptionHandler::MissingToken, 'Missing token' unless header
     raise ExceptionHandler::InvalidToken, 'Invalid token' unless auth_scheme == 'Bearer'
-    
+
     process_token(content.last)
   end
 
