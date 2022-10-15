@@ -22,6 +22,7 @@ RSpec.describe 'api/v1/classroom_teachers', type: :request do
       produces 'application/json'
       response(200, 'successful') do
         schema type: :array, items: { '$ref' => '#/components/schemas/classroom_teacher' }
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
     end
@@ -32,6 +33,8 @@ RSpec.describe 'api/v1/classroom_teachers', type: :request do
       produces 'application/json'
       parameter name: :classroom_teacher, in: :body, schema: { '$ref' => '#/components/schemas/classroom_teacher' }
       response(201, 'successful') do
+        schema '$ref' => '#/components/schemas/classroom_teacher'
+        let(:Authorization) { AuthHelper.http_login }
         let(:classroom_teacher) do
           { classroom_id: classroom.id, cohort_term_id: cohort_term.id, person_id: person_two.id }
         end
@@ -40,6 +43,7 @@ RSpec.describe 'api/v1/classroom_teachers', type: :request do
 
       response 422, 'invalid request' do
         schema '$ref' => '#/components/schemas/common_error'
+        let(:Authorization) { AuthHelper.http_login }
         let(:classroom_teacher) do
           { classroom_id: -1, cohort_term_id: -1, person_id: -1 }
         end
@@ -58,12 +62,14 @@ RSpec.describe 'api/v1/classroom_teachers', type: :request do
 
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/classroom_teacher'
+        let(:Authorization) { AuthHelper.http_login }
         let(:id) { test_classroom_teacher.id }
         run_test!
       end
 
       response(404, 'not found') do
         schema '$ref' => '#/components/schemas/common_error'
+        let(:Authorization) { AuthHelper.http_login }
         let(:id) { 'invalid' }
         run_test!
       end
@@ -76,7 +82,7 @@ RSpec.describe 'api/v1/classroom_teachers', type: :request do
       parameter name: :classroom_teacher, in: :body, schema: { '$ref' => '#/components/schemas/classroom_teacher' }
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/classroom_teacher'
-
+        let(:Authorization) { AuthHelper.http_login }
         let(:id) { test_classroom_teacher.id }
         let(:classroom_teacher) { { person_id: person_two.id } }
 
@@ -85,6 +91,7 @@ RSpec.describe 'api/v1/classroom_teachers', type: :request do
 
       response(404, 'not found') do
         schema '$ref' => '#/components/schemas/common_error'
+        let(:Authorization) { AuthHelper.http_login }
         let(:id) { 'invalid' }
         let(:classroom_teacher) { { person_id: person_two.id } }
         run_test!
@@ -92,6 +99,7 @@ RSpec.describe 'api/v1/classroom_teachers', type: :request do
 
       response 422, 'invalid request' do
         schema '$ref' => '#/components/schemas/common_error'
+        let(:Authorization) { AuthHelper.http_login }
         let(:id) { test_classroom_teacher.id }
         let(:classroom_teacher) { { person_id: -1 } }
         run_test!
@@ -104,6 +112,7 @@ RSpec.describe 'api/v1/classroom_teachers', type: :request do
       parameter name: :void_reason, in: :query, type: :string, description: 'void reason'
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/common_response'
+        let(:Authorization) { AuthHelper.http_login }
         let(:id) { test_classroom_teacher.id }
         let(:void_reason) { 'test' }
         run_test!
@@ -111,6 +120,7 @@ RSpec.describe 'api/v1/classroom_teachers', type: :request do
 
       response(404, 'not found') do
         schema '$ref' => '#/components/schemas/common_error'
+        let(:Authorization) { AuthHelper.http_login }
         let(:id) { 'invalid' }
         let(:void_reason) { 'test' }
         run_test!
@@ -118,6 +128,7 @@ RSpec.describe 'api/v1/classroom_teachers', type: :request do
 
       response 400, 'bad request' do
         schema '$ref' => '#/components/schemas/common_error'
+        let(:Authorization) { AuthHelper.http_login }
         let(:id) { test_classroom_teacher.id }
         let(:void_reason) { '' }
         run_test!

@@ -4,6 +4,7 @@
 class Api::V1::AuthenticationController < ActionController::API
   def login
     auth_token = authenticate_user
+    Rails.logger.info "remote_ip: #{request.remote_ip}"
     if auth_token
       json_response(auth_token: JsonWebToken.encode({ person_id: EncryptorDecryptor.encrypt(auth_token.person_id), name: auth_token.person.name,
                                                       roles: auth_token.roles.map(&:name), username: auth_params[:username] }, request.remote_ip))
