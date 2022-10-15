@@ -1,5 +1,5 @@
 class Api::V1::ClassroomTeachersController < ApplicationController
-  before_action :set_classroom_teacher, only: [:show, :update, :destroy]
+  before_action :set_classroom_teacher, only: %i[show update destroy]
 
   # GET /classroom_teachers
   def index
@@ -18,7 +18,7 @@ class Api::V1::ClassroomTeachersController < ApplicationController
     @classroom_teacher = ClassroomTeacher.new(classroom_teacher_params)
 
     if @classroom_teacher.save
-      render json: @classroom_teacher, status: :created, location: @classroom_teacher
+      render json: @classroom_teacher, status: :created
     else
       render json: @classroom_teacher.errors, status: :unprocessable_entity
     end
@@ -35,17 +35,19 @@ class Api::V1::ClassroomTeachersController < ApplicationController
 
   # DELETE /classroom_teachers/1
   def destroy
-    @classroom_teacher.destroy
+    @classroom_teacher.void(params.require(:void_reason))
+    render json: { message: 'ClassroomTeacher was successfully removed.' }, status: :ok
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_classroom_teacher
-      @classroom_teacher = ClassroomTeacher.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def classroom_teacher_params
-      params.require(:classroom_teacher).permit(:classroom_id, :cohort_term_id, :person_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_classroom_teacher
+    @classroom_teacher = ClassroomTeacher.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def classroom_teacher_params
+    params.require(:classroom_teacher).permit(:classroom_id, :cohort_term_id, :person_id)
+  end
 end
