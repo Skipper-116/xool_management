@@ -24,6 +24,13 @@ RSpec.configure do |config|
       },
       paths: {},
       components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: :http,
+            scheme: :bearer,
+            bearerFormat: :JWT
+          }
+        },
         schemas: {
           common_error: {
             type: :object,
@@ -390,6 +397,8 @@ RSpec.configure do |config|
           }
         }
       },
+      # apply global security to all operations
+      security: [bearerAuth: []],
       servers: [
         {
           url: '{defaultHost}',
