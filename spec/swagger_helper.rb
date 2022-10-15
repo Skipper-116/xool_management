@@ -70,7 +70,7 @@ RSpec.configure do |config|
             },
             required: %w[classroom_id cohort_term_id person_id]
           },
-          classroom_teachers: {
+          classroom_teacher: {
             type: :object,
             properties: {
               id: { type: :integer },
