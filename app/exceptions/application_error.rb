@@ -87,3 +87,9 @@ class InvalidClientSecret < ApplicationError
     super(message, :unauthorized)
   end
 end
+
+class MissingToken < ApplicationError
+  def initialize(message = 'Missing token')
+    super(message, :unauthorized)
+  end
+end

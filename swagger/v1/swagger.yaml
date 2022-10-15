@@ -459,6 +459,11 @@ paths:
               schema:
                 "$ref": "#/components/schemas/common_error"
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     common_error:
       type: object
@@ -1109,6 +1114,8 @@ components:
       required:
       - username
       - password
+security:
+- bearerAuth: []
 servers:
 - url: "{defaultHost}"
   variables:

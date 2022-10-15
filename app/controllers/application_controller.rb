@@ -3,18 +3,22 @@
 # this is the main controller
 class ApplicationController < ActionController::API
   include ExceptionHandler
-  # before_action :authorize_request
+  before_action :authorize_request
 
   def authorize_request
     header = request.headers['Authorization']
-    header = header.split(' ').last if header
-    begin
-      decoded = JsonWebToken.decode(header, request.remote_ip)
-      User.current = User.find(EncryptorDecryptor.decrypt(decoded[:person_id]))
-    rescue ActiveRecord::RecordNotFound
-      render json: { errors: 'Invalid authorization code' }, status: :unauthorized
-    rescue JWT::DecodeError
-      render json: { errors: 'Invalid authorization code' }, status: :unauthorized
-    end
+    content = header.split(' ')
+    auth_scheme = content.first
+    raise ExceptionHandler::MissingToken, 'Missing token' unless header
+    raise ExceptionHandler::InvalidToken, 'Invalid token' unless auth_scheme == 'Bearer'
+    
+    process_token(content.last)
+  end
+
+  private
+
+  def process_token(token)
+    decoded = JsonWebToken.decode(token, request.remote_ip)
+    User.current = User.find(EncryptorDecryptor.decrypt(decoded[:person_id]))
   end
 end

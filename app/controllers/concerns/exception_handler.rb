@@ -128,6 +128,10 @@ module ExceptionHandler
     rescue_from InvalidClientSecret do |e|
       render json: { errors: [e.message] }, status: :unauthorized
     end
+
+    rescue_from MissingToken do |e|
+      render json: { errors: [e.message] }, status: :unauthorized
+    end
   end
   # rubocop:enable Metrics/BlockLength
 end
