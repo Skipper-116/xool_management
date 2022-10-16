@@ -1,5 +1,5 @@
 class Api::V1::ClassroomsController < ApplicationController
-  before_action :set_classroom, only: [:show, :update, :destroy]
+  before_action :set_classroom, only: %i[show update destroy]
 
   # GET /classrooms
   def index
@@ -18,7 +18,7 @@ class Api::V1::ClassroomsController < ApplicationController
     @classroom = Classroom.new(classroom_params)
 
     if @classroom.save
-      render json: @classroom, status: :created, location: @classroom
+      render json: @classroom, status: :created
     else
       render json: @classroom.errors, status: :unprocessable_entity
     end
@@ -35,17 +35,19 @@ class Api::V1::ClassroomsController < ApplicationController
 
   # DELETE /classrooms/1
   def destroy
-    @classroom.destroy
+    @classroom.void(params.require(:void_reason))
+    render json: { message: 'Classroom was successfully voided.' }, status: :ok
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_classroom
-      @classroom = Classroom.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def classroom_params
-      params.require(:classroom).permit(:name, :description, :space)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_classroom
+    @classroom = Classroom.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def classroom_params
+    params.require(:classroom).permit(:name, :description, :space)
+  end
 end
