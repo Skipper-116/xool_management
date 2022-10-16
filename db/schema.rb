@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_02_100702) do
   create_table "classrooms", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.float "space"
+    t.integer "space"
     t.boolean "voided", default: false
     t.string "void_reason"
     t.datetime "date_voided", precision: nil
