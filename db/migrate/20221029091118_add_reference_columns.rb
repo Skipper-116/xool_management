@@ -8,6 +8,8 @@ class AddReferenceColumns < ActiveRecord::Migration[7.0]
       # skip the schema_migrations table
       next if table_name == 'schema_migrations'
       next if table_name == 'ar_internal_metadata'
+      next if table_name == 'schema_info'
+      next if table_name == 'users'
 
       puts "Adding reference columns to #{table_name}"
       add_changed_by_column(table_name)
