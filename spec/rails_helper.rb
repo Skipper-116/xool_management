@@ -68,15 +68,13 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
 
-  config.include AuthHelper, type: :controller
+  config.include AuthHelper, type: :request
 
   # Database cleaner to be used with rspec
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-    Rails.application.load_seed # loading seeds
-  end
-
-  config.after(:all) do
-    DatabaseCleaner.clean
-  end
+  # config.before(:suite) do
+  #   DatabaseCleaner.clean_with(:truncation)
+  #   puts "Loading seeds"
+  #   Rails.application.load_seed # loading seeds
+  #   puts "Completed loading seeds"
+  # end
 end

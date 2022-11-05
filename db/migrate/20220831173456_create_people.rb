@@ -6,7 +6,7 @@ class CreatePeople < ActiveRecord::Migration[5.2]
       t.boolean :birthdate_estimated, default: false, null: false
       t.boolean :voided, default: false, null: false
       t.string :void_reason
-      t.datetime :date_voided, null: true
+      t.datetime :voided_at, null: true
 
       t.timestamps
     end

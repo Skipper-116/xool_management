@@ -37,7 +37,6 @@ module Auditable
       Rails.logger.warn "Auditable model missing creator or date_created: #{self}"
       return
     end
-
     self.creator = User.current.person_id if creator.nil? || creator.zero?
     Rails.logger.warn 'Auditable::update_create_trail called outside login' unless creator
 

@@ -16,7 +16,6 @@ class Api::V1::PeopleController < ApplicationController
   # POST /people
   def create
     @person = Person.new(person_params)
-
     if @person.save
       render json: @person, status: :created
     else
@@ -43,7 +42,7 @@ class Api::V1::PeopleController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_person
-    @person = Person.where(id: params[:id])&.first
+    @person = Person.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

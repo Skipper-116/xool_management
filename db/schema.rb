@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.bigint "classroom_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.bigint "person_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.bigint "person_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.integer "space"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -94,7 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.bigint "cohort_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -114,7 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.string "description"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -130,7 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.string "description"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -146,7 +146,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.string "pattern"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -163,7 +163,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.boolean "birthdate_estimated", default: false, null: false
     t.boolean "voided", default: false, null: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -182,7 +182,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.bigint "input_types_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -200,7 +200,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.string "attribute_value"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -221,7 +221,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.bigint "person_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -238,7 +238,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.bigint "person_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -256,7 +256,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.string "description"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -273,7 +273,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.bigint "person_b", null: false
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -292,7 +292,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.string "description"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -312,7 +312,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.string "absent_reason"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.datetime "obs_datetime"
@@ -333,7 +333,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.string "desciption"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -352,7 +352,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.string "absent_reason"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -371,7 +371,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.bigint "subject_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -397,7 +397,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.datetime "results_available", precision: nil
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -418,7 +418,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.float "grade"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -437,7 +437,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.float "scale"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -453,7 +453,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.bigint "person_id"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false
@@ -472,7 +472,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.string "password_recovery_digest"
     t.boolean "voided", default: false
     t.string "void_reason"
-    t.datetime "date_voided", precision: nil
+    t.datetime "voided_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "creator", default: 1, null: false

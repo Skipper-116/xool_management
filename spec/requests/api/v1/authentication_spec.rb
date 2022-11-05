@@ -17,7 +17,7 @@ RSpec.describe 'Authentication Management', type: :request do
         type: :object,
         properties: {
           username: { type: :string },
-          password: { type: :string }
+          password: { type: :string, format: :password }
         },
         required: %w[username password]
       }

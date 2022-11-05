@@ -46,6 +46,6 @@ class Api::V1::InputTypesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def input_type_params
-      params.require(:input_type).permit(:name, :pattern, :voided, :void_reason, :date_voided)
+      params.require(:input_type).permit(:name, :pattern, :voided, :void_reason, :voided_at)
     end
 end

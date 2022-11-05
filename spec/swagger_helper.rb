@@ -163,7 +163,7 @@ RSpec.configure do |config|
               birthdate_estimated: { type: :boolean, nullable: true },
               voided: { type: :boolean },
               void_reason: { type: :string, nullable: true },
-              date_voided: { type: :string, nullable: true },
+              voided_at: { type: :string, nullable: true },
               created_at: { type: :string, format: :date_time },
               updated_at: { type: :string, format: :date_time },
               gender: { '$ref' => '#/components/schemas/gender' }

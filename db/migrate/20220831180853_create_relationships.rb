@@ -6,7 +6,7 @@ class CreateRelationships < ActiveRecord::Migration[5.2]
       t.bigint :person_b, null: false
       t.boolean :voided, default: false
       t.string :void_reason
-      t.datetime :date_voided, null: true
+      t.datetime :voided_at, null: true
 
       t.timestamps
     end

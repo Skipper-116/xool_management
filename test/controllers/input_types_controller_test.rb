@@ -12,7 +12,7 @@ class InputTypesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create input_type" do
     assert_difference('InputType.count') do
-      post input_types_url, params: { input_type: { date_voided: @input_type.date_voided, name: @input_type.name, pattern: @input_type.pattern, void_reason: @input_type.void_reason, voided: @input_type.voided } }, as: :json
+      post input_types_url, params: { input_type: { voided_at: @input_type.voided_at, name: @input_type.name, pattern: @input_type.pattern, void_reason: @input_type.void_reason, voided: @input_type.voided } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class InputTypesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update input_type" do
-    patch input_type_url(@input_type), params: { input_type: { date_voided: @input_type.date_voided, name: @input_type.name, pattern: @input_type.pattern, void_reason: @input_type.void_reason, voided: @input_type.voided } }, as: :json
+    patch input_type_url(@input_type), params: { input_type: { voided_at: @input_type.voided_at, name: @input_type.name, pattern: @input_type.pattern, void_reason: @input_type.void_reason, voided: @input_type.voided } }, as: :json
     assert_response 200
   end
 
