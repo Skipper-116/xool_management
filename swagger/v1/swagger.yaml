@@ -44,6 +44,7 @@ paths:
                   type: string
                 password:
                   type: string
+                  format: password
               required:
               - username
               - password
@@ -264,6 +265,10 @@ paths:
       responses:
         '201':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/classroom_teacher"
         '422':
           description: invalid request
           content:
@@ -688,7 +693,7 @@ components:
         void_reason:
           type: string
           nullable: true
-        date_voided:
+        voided_at:
           type: string
           nullable: true
         created_at:

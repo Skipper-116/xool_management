@@ -13,7 +13,7 @@ module Voidable
 
     clazz = self.class
     clazz._update_voidable_field self, :voided, 1
-    clazz._update_voidable_field self, :date_voided, Time.now
+    clazz._update_voidable_field self, :voided_at, Time.now
     clazz._update_voidable_field self, :void_reason, reason
     clazz._update_voidable_field self, :voided_by, user ? user.id : nil
 
@@ -46,14 +46,13 @@ module Voidable
     #    class Retirable
     #       include Voidable
     #
-    #       remap_voidable_interface(voided: :retired, date_voided: :date_retired)
+    #       remap_voidable_interface(voided: :retired, voided_at: :date_retired)
     #    end
-    def remap_voidable_interface(voided: :voided, date_voided: :date_voided,
-                                 void_reason: :void_reason)
+    def remap_voidable_interface(voided: :voided, voided_at: :voided_at, void_reason: :void_reason)
       @interface = {
-        voided: voided,
-        date_voided: date_voided,
-        void_reason: void_reason
+        voided:,
+        voided_at:,
+        void_reason:
       }
     end
 
@@ -99,7 +98,7 @@ module Voidable
 
     def _update_voidable_field(instance, field, value)
       # remap_voidable_interface unless @interface # Initialise default interface
-      setter = (_voidable_field(field).to_s + '=').to_sym
+      setter = (_voidable_field(field).to_s + '=~').to_sym
       instance.method(setter).call(value)
     end
   end
