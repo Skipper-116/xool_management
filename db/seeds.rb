@@ -19,8 +19,6 @@ ActiveRecord::Base.connection.execute('SET FOREIGN_KEY_CHECKS = 1')
 # rubocop:disable Metrics/BlockLength
 ActiveRecord::Base.transaction do
   # disable referential integrity
-  puts "Created #{Person.count} person records"
-  puts "this is the person id: #{Person.last.id}"
   PersonName.create(given_name: 'Super', family_name: 'User', person: Person.first, creator: Person.first.id)
   User.create(username: 'superuser', password: 'password', person: Person.first, creator: Person.first.id)
   UserRole.create(person: Person.first, role: Role.first, creator: Person.first.id)

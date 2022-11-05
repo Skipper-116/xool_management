@@ -69,7 +69,7 @@ RSpec.describe 'People Management', type: :request do
         parameter name: 'id', in: :path, type: :string
         parameter name: :person, in: :body, schema: { '$ref' => '#/components/schemas/person' }
 
-        person = Person.create!(birthdate: '2022-09-01'.to_date, gender_id: 1, birthdate_estimated: 0)
+        person = Person.create!(birthdate: '2022-09-01'.to_date, gender_id: Gender.first.id, birthdate_estimated: 0)
         response(200, 'successful') do
           let(:Authorization) { AuthHelper.http_login }
           let(:id) { person.id }
