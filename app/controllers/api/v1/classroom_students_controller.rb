@@ -15,9 +15,9 @@ class Api::V1::ClassroomStudentsController < ApplicationController
 
   # POST /classroom_students
   def create
-    @classroom_student = ClassroomStudent.new(classroom_student_params)
+    @classroom_student = ClassroomStudent.create!(classroom_student_params)
 
-    if @classroom_student.save
+    if @classroom_student.errors.empty?
       render json: @classroom_student, status: :created
     else
       render json: @classroom_student.errors, status: :unprocessable_entity

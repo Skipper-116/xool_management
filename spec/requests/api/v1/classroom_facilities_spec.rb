@@ -17,6 +17,8 @@ RSpec.describe 'Classroom Facilities API', type: :request do
       produces 'application/json'
       response(200, 'successful') do
         schema type: :array, items: { '$ref' => '#/components/schemas/classroom_facility' }
+
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
     end
@@ -33,6 +35,7 @@ RSpec.describe 'Classroom Facilities API', type: :request do
           { name: 'Classroom Facility', description: 'Classroom Facility Description', quantity: 1,
             classroom_id: @classroom.id }
         end
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
 
@@ -41,6 +44,7 @@ RSpec.describe 'Classroom Facilities API', type: :request do
         let(:classroom_facility) do
           { name: 'Classroom Facility', description: 'Classroom Facility Description', quantity: -1, classroom_id: -1 }
         end
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
     end
@@ -56,11 +60,13 @@ RSpec.describe 'Classroom Facilities API', type: :request do
         schema '$ref' => '#/components/schemas/classroom_facility'
 
         let(:id) { @classroom_facility.id }
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
       response 404, 'not found' do
         schema '$ref' => '#/components/schemas/common_error'
         let(:id) { 'invalid' }
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
     end
@@ -76,6 +82,7 @@ RSpec.describe 'Classroom Facilities API', type: :request do
         let(:classroom_facility) do
           { name: 'Classroom Facility', description: 'Classroom Facility Description', quantity: 1, classroom_id: @classroom.id }
         end
+        let(:Authorization) { AuthHelper.http_login }
 
         run_test!
       end
@@ -86,6 +93,7 @@ RSpec.describe 'Classroom Facilities API', type: :request do
         let(:classroom_facility) do
           { name: 'Classroom Facility', description: 'Classroom Facility Description', quantity: -1, classroom_id: -1 }
         end
+        let(:Authorization) { AuthHelper.http_login }
 
         run_test!
       end
@@ -99,12 +107,15 @@ RSpec.describe 'Classroom Facilities API', type: :request do
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/common_response'
         let(:id) { @classroom_facility.id }
+        let(:Authorization) { AuthHelper.http_login }
+
         run_test!
       end
       response 404, 'not found' do
         schema '$ref' => '#/components/schemas/common_error'
 
         let(:id) { 'invalid' }
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
     end

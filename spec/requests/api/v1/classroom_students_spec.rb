@@ -6,8 +6,7 @@ TAG = 'Classroom Students'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe 'Classroom Student Endpoints', type: :request do
-
-  let(:classroom) { create :classroom }
+  let(:classroom) { create :classroom, space: 2 }
   let(:cohort) { create :cohort }
   let(:cohort_term) { create :cohort_term, cohort: }
   let(:person) { create :person }
@@ -21,6 +20,7 @@ RSpec.describe 'Classroom Student Endpoints', type: :request do
       produces 'application/json'
 
       response(200, 'successful') do
+        let(:Authorization) { AuthHelper.http_login }
         schema type: :array, items: { '$ref' => '#/components/schemas/classroom_student' }
         run_test!
       end
@@ -34,15 +34,21 @@ RSpec.describe 'Classroom Student Endpoints', type: :request do
       response(201, 'successful') do
         schema '$ref' => '#/components/schemas/classroom_student'
 
-        let(:classroom_student) { create :classroom_student, classroom:, cohort_term:, person: person_two }
+        let(:classroom_student) do 
+          { classroom_id: classroom.id, cohort_term_id: cohort_term.id, person_id: person.id }
+        end
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
 
-      response 422, 'invalid request' do
+      response 404, 'invalid request' do
+        description 'If the specified resource is not found, a 404 error is returned.'
         schema '$ref' => '#/components/schemas/common_error'
         let(:classroom_student) do
           { classroom_id: -1, cohort_term_id: -1, person_id: -1 }
         end
+        let(:Authorization) { AuthHelper.http_login }
+
         run_test!
       end
     end
@@ -60,6 +66,7 @@ RSpec.describe 'Classroom Student Endpoints', type: :request do
         schema '$ref' => '#/components/schemas/classroom_student'
 
         let(:id) { test_classroom_student.id }
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
     end
@@ -74,6 +81,7 @@ RSpec.describe 'Classroom Student Endpoints', type: :request do
 
         let(:id) { test_classroom_student.id }
         let(:classroom_student) { { person_id: person_two.id } }
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
     end
@@ -84,6 +92,7 @@ RSpec.describe 'Classroom Student Endpoints', type: :request do
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/common_response'
         let(:id) { test_classroom_student.id }
+        let(:Authorization) { AuthHelper.http_login }
         run_test!
       end
     end
