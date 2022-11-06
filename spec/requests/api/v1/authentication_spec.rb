@@ -13,6 +13,8 @@ RSpec.describe 'Authentication Management', type: :request do
       tags TAG
       consumes 'application/json'
       produces 'application/json'
+      # disable security for this endpoint
+      security []
       parameter name: :authentication, in: :body, schema: {
         type: :object,
         properties: {
