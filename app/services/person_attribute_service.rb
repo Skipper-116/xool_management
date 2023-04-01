@@ -6,7 +6,7 @@ class PersonAttributeService
     attributes.each do |attribute|
       next unless validate_attribute(attribute)
 
-      person.person_attributes.create(attribute)
+      person.person_attributes.create!(attribute)
     end
   end
 

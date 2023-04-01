@@ -19,11 +19,11 @@ class PersonService
   private
 
   def common_create(params)
-    person = Person.create(params[:person_params])
+    person = Person.create!(params[:person_params])
     params[:person_name_params][:person_id] = person.id
-    PersonName.create(params[:person_name_params])
+    PersonName.create!(params[:person_name_params])
     PersonAttributeService.new.create_attribute(person, params[:person_attributes])
-    @mailable << UserService.new.create_user(person, params[:username]).mailable
+    mailable << UserService.new.create_user(person:, username: params[:username], passwor: [:password]).mailable
     UserRoleService.create_user_roles(person, params[:roles])
   end
 

@@ -11,7 +11,7 @@ class UserService
 
   def create_user(person:, username:, password:)
     password = generate_password if Rails.application.config_for(:application).generate_password && password.blank?
-    user = User.create(
+    user = User.create!(
       person:,
       password:,
       username: username || person.email || person.id
