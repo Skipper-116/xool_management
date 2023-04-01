@@ -2,15 +2,15 @@
 
 # This class is used to manage person attributes and services
 class PersonAttributeService
-  def create_attribute(person, attributes)
+  def create_attribute(person:, attributes:)
     attributes.each do |attribute|
-      next unless validate_attribute(attribute)
+      next unless validate_attribute(attribute:)
 
-      person.person_attributes.create!(attribute)
+      PersonAttribute.find_or_create_by!(**attribute, person:)
     end
   end
 
-  def validate_attribute(attribute)
+  def validate_attribute(attribute:)
     attr_type = PersonAttributeType.find(attribute[:person_attribute_type_id])
     input_type = attr_type.input_type.pattern
     return true if input_type.blank?

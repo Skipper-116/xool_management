@@ -24,7 +24,7 @@ class PersonService
     PersonName.create!(params[:person_name_params])
     PersonAttributeService.new.create_attribute(person, params[:person_attributes])
     mailable << UserService.new.create_user(person:, username: params[:username], passwor: [:password]).mailable
-    UserRoleService.create_user_roles(person, params[:roles])
+    UserRoleService.create_user_roles(person:, roles: params[:roles])
   end
 
   def process_student(person, pupils)
