@@ -2,9 +2,10 @@
 
 # This class is used to encode and decode the JWT token
 class JsonWebToken
-  SECRET_KEY = Rails.application.secrets.secret_key_base.to_s
+  SECRET_KEY = Rails.application.secrets.secret_key_base.to_s + Rails.application.config_for(:application).jwt_key
+  SESSION_HRS = Rails.application.config_for(:application).session_hrs || 24
 
-  def self.encode(payload, request_ip, exp = 24.hours.from_now)
+  def self.encode(payload, request_ip, exp = SESSION_HRS.hours.from_now)
     payload[:exp] = exp.to_i
     JWT.encode(payload, SECRET_KEY + request_ip)
   end

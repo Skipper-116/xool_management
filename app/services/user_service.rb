@@ -9,8 +9,8 @@ class UserService
     @mailable = nil
   end
 
-  def create_user(person, username)
-    password = generate_password
+  def create_user(person:, username:, password:)
+    password = generate_password if Rails.application.config_for(:application).generate_password && password.blank?
     user = User.create(
       person:,
       password:,
