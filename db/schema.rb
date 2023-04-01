@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
-  create_table "classroom_facilities", charset: "utf8", force: :cascade do |t|
+  create_table "classroom_facilities", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.float "quantity"
@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_ca2f712d58"
   end
 
-  create_table "classroom_students", charset: "utf8", force: :cascade do |t|
+  create_table "classroom_students", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "classroom_id"
     t.bigint "cohort_term_id"
     t.bigint "person_id"
@@ -50,7 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_b06c233c12"
   end
 
-  create_table "classroom_teachers", charset: "utf8", force: :cascade do |t|
+  create_table "classroom_teachers", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "classroom_id"
     t.bigint "cohort_term_id"
     t.bigint "person_id"
@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_ac91c3c717"
   end
 
-  create_table "classrooms", charset: "utf8", force: :cascade do |t|
+  create_table "classrooms", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.integer "space"
@@ -87,7 +87,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_a94ea07eea"
   end
 
-  create_table "cohort_terms", charset: "utf8", force: :cascade do |t|
+  create_table "cohort_terms", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
     t.date "end_date"
@@ -106,7 +106,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_82185ed47c"
   end
 
-  create_table "cohorts", charset: "utf8", force: :cascade do |t|
+  create_table "cohorts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "short_name"
     t.date "start_date"
@@ -125,7 +125,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_05c565ffc7"
   end
 
-  create_table "genders", charset: "utf8", force: :cascade do |t|
+  create_table "genders", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.boolean "voided", default: false
@@ -141,7 +141,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_3837087ce6"
   end
 
-  create_table "input_types", charset: "utf8", force: :cascade do |t|
+  create_table "input_types", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "pattern"
     t.boolean "voided", default: false
@@ -157,7 +157,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_2ca4605ff5"
   end
 
-  create_table "people", charset: "utf8", force: :cascade do |t|
+  create_table "people", charset: "utf8mb3", force: :cascade do |t|
     t.date "birthdate"
     t.bigint "gender_id"
     t.boolean "birthdate_estimated", default: false, null: false
@@ -175,7 +175,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_a6e182138c"
   end
 
-  create_table "person_attribute_types", charset: "utf8", force: :cascade do |t|
+  create_table "person_attribute_types", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.boolean "is_required", default: false
@@ -194,7 +194,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_812bf068ba"
   end
 
-  create_table "person_attributes", charset: "utf8", force: :cascade do |t|
+  create_table "person_attributes", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "person_id"
     t.bigint "person_attribute_type_id"
     t.string "attribute_value"
@@ -213,7 +213,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_75dfd7225b"
   end
 
-  create_table "person_names", charset: "utf8", force: :cascade do |t|
+  create_table "person_names", charset: "utf8mb3", force: :cascade do |t|
     t.string "given_name"
     t.string "family_name"
     t.string "maiden_name"
@@ -233,7 +233,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_632f6401a5"
   end
 
-  create_table "profile_pictures", charset: "utf8", force: :cascade do |t|
+  create_table "profile_pictures", charset: "utf8mb3", force: :cascade do |t|
     t.string "image_url"
     t.bigint "person_id"
     t.boolean "voided", default: false
@@ -250,7 +250,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_51a72b03b3"
   end
 
-  create_table "relationship_types", charset: "utf8", force: :cascade do |t|
+  create_table "relationship_types", charset: "utf8mb3", force: :cascade do |t|
     t.string "a_is_to_b"
     t.string "b_is_to_a"
     t.string "description"
@@ -267,7 +267,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_582d8ad8c0"
   end
 
-  create_table "relationships", charset: "utf8", force: :cascade do |t|
+  create_table "relationships", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "person_a", null: false
     t.bigint "relationship_type_id"
     t.bigint "person_b", null: false
@@ -287,7 +287,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_e36f863f3f"
   end
 
-  create_table "roles", charset: "utf8", force: :cascade do |t|
+  create_table "roles", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.boolean "voided", default: false
@@ -303,7 +303,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_f81e95d70c"
   end
 
-  create_table "student_registries", charset: "utf8", force: :cascade do |t|
+  create_table "student_registries", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "classroom_id"
     t.bigint "cohort_term_id"
     t.bigint "person_id"
@@ -328,7 +328,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_d08f32821b"
   end
 
-  create_table "subjects", charset: "utf8", force: :cascade do |t|
+  create_table "subjects", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "desciption"
     t.boolean "voided", default: false
@@ -344,7 +344,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_9275d21594"
   end
 
-  create_table "teacher_registries", charset: "utf8", force: :cascade do |t|
+  create_table "teacher_registries", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "cohort_id"
     t.bigint "person_id"
     t.bigint "captured_by"
@@ -366,7 +366,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_3f6a3b2000"
   end
 
-  create_table "teacher_subjects", charset: "utf8", force: :cascade do |t|
+  create_table "teacher_subjects", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "person_id"
     t.bigint "subject_id"
     t.boolean "voided", default: false
@@ -384,7 +384,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_f0c50e4432"
   end
 
-  create_table "test_records", charset: "utf8", force: :cascade do |t|
+  create_table "test_records", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "classroom_id"
     t.bigint "cohort_term_id"
     t.bigint "subject_id"
@@ -412,7 +412,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_2723ca2233"
   end
 
-  create_table "test_results", charset: "utf8", force: :cascade do |t|
+  create_table "test_results", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "test_records_id"
     t.bigint "person_id"
     t.float "grade"
@@ -431,7 +431,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_d60aefd51e"
   end
 
-  create_table "test_types", charset: "utf8", force: :cascade do |t|
+  create_table "test_types", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.float "scale"
@@ -448,7 +448,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_7d6e4f90a5"
   end
 
-  create_table "user_roles", charset: "utf8", force: :cascade do |t|
+  create_table "user_roles", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "role_id"
     t.bigint "person_id"
     t.boolean "voided", default: false
@@ -466,7 +466,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_091118) do
     t.index ["voided_by"], name: "fk_rails_890dce8496"
   end
 
-  create_table "users", primary_key: "person_id", id: :bigint, default: nil, charset: "utf8", force: :cascade do |t|
+  create_table "users", primary_key: "person_id", id: :bigint, default: nil, charset: "utf8mb3", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
     t.string "password_recovery_digest"

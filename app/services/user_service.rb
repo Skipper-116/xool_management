@@ -22,6 +22,8 @@ class UserService
   private
 
   def generate_password
-    SecureRandom.base64[0..7]
+    length = Rails.application.config_for(:application).password_length
+    # this should create a random password that contains special characters and numbers as well
+    SecureRandom.base64(length)
   end
 end

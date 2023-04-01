@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# This class will manage all user related operation
 class User < VoidableRecord
   has_secure_password
   # has_secure_password :recover_password, validations: false
@@ -7,7 +10,8 @@ class User < VoidableRecord
   has_many :roles, through: :user_roles
 
   validates :username, presence: true, uniqueness: true
-  validates :password, presence: true, on: :create, length: { minimum: 6 }
+  validates :password, presence: true, on: :create,
+                       length: { minimum: Rails.application.config_for(:application).password_length }
 
   def self.current
     Thread.current['current_user']
