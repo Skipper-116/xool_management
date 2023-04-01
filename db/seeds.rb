@@ -8,6 +8,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 if Person.count.zero?
   ActiveRecord::Base.connection.execute('SET FOREIGN_KEY_CHECKS = 0')
   person = Person.new(birthdate: Date.today, gender_id: 1, creator: 1)
@@ -72,7 +73,7 @@ ActiveRecord::Base.transaction do
                { name: 'Student', description: 'Person seeking knowledge', creator: Person.first.id },
                { name: 'Guardian', description: 'Person who is responible for the student', creator: Person.first.id }])
 
-  RelationshipType.find_or_create_by!(a_is_to_b: 'Father', b_is_to_a: 'Son', description: 'Father to son relationship',
+RelationshipType.find_or_create_by!(a_is_to_b: 'Father', b_is_to_a: 'Son', description: 'Father to son relationship',
                           creator: Person.first.id)
 end
 # rubocop:enable Metrics/BlockLength
