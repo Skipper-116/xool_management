@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class RolesControllerTest < ActionDispatch::IntegrationTest
@@ -5,12 +7,12 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     @role = roles(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get roles_url, as: :json
     assert_response :success
   end
 
-  test "should create role" do
+  test 'should create role' do
     assert_difference('Role.count') do
       post roles_url, params: { role: { description: @role.description, name: @role.name } }, as: :json
     end
@@ -18,17 +20,17 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     assert_response 201
   end
 
-  test "should show role" do
+  test 'should show role' do
     get role_url(@role), as: :json
     assert_response :success
   end
 
-  test "should update role" do
+  test 'should update role' do
     patch role_url(@role), params: { role: { description: @role.description, name: @role.name } }, as: :json
     assert_response 200
   end
 
-  test "should destroy role" do
+  test 'should destroy role' do
     assert_difference('Role.count', -1) do
       delete role_url(@role), as: :json
     end

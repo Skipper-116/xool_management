@@ -34,7 +34,7 @@ RSpec.describe 'Classroom Student Endpoints', type: :request do
       response(201, 'successful') do
         schema '$ref' => '#/components/schemas/classroom_student'
 
-        let(:classroom_student) do 
+        let(:classroom_student) do
           { classroom_id: classroom.id, cohort_term_id: cohort_term.id, person_id: person.id }
         end
         let(:Authorization) { AuthHelper.http_login }

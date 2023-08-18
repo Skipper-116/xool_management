@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class GendersControllerTest < ActionDispatch::IntegrationTest
@@ -5,12 +7,12 @@ class GendersControllerTest < ActionDispatch::IntegrationTest
     @gender = genders(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get genders_url, as: :json
     assert_response :success
   end
 
-  test "should create gender" do
+  test 'should create gender' do
     assert_difference('Gender.count') do
       post genders_url, params: { gender: { description: @gender.description, name: @gender.name } }, as: :json
     end
@@ -18,17 +20,17 @@ class GendersControllerTest < ActionDispatch::IntegrationTest
     assert_response 201
   end
 
-  test "should show gender" do
+  test 'should show gender' do
     get gender_url(@gender), as: :json
     assert_response :success
   end
 
-  test "should update gender" do
+  test 'should update gender' do
     patch gender_url(@gender), params: { gender: { description: @gender.description, name: @gender.name } }, as: :json
     assert_response 200
   end
 
-  test "should destroy gender" do
+  test 'should destroy gender' do
     assert_difference('Gender.count', -1) do
       delete gender_url(@gender), as: :json
     end

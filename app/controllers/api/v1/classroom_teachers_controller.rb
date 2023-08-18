@@ -1,53 +1,59 @@
-class Api::V1::ClassroomTeachersController < ApplicationController
-  before_action :set_classroom_teacher, only: %i[show update destroy]
+# frozen_string_literal: true
 
-  # GET /classroom_teachers
-  def index
-    @classroom_teachers = ClassroomTeacher.all
+module Api
+  module V1
+    class ClassroomTeachersController < ApplicationController
+      before_action :set_classroom_teacher, only: %i[show update destroy]
 
-    render json: @classroom_teachers
-  end
+      # GET /classroom_teachers
+      def index
+        @classroom_teachers = ClassroomTeacher.all
 
-  # GET /classroom_teachers/1
-  def show
-    render json: @classroom_teacher
-  end
+        render json: @classroom_teachers
+      end
 
-  # POST /classroom_teachers
-  def create
-    @classroom_teacher = ClassroomTeacher.new(classroom_teacher_params)
+      # GET /classroom_teachers/1
+      def show
+        render json: @classroom_teacher
+      end
 
-    if @classroom_teacher.save
-      render json: @classroom_teacher, status: :created
-    else
-      render json: @classroom_teacher.errors, status: :unprocessable_entity
+      # POST /classroom_teachers
+      def create
+        @classroom_teacher = ClassroomTeacher.new(classroom_teacher_params)
+
+        if @classroom_teacher.save
+          render json: @classroom_teacher, status: :created
+        else
+          render json: @classroom_teacher.errors, status: :unprocessable_entity
+        end
+      end
+
+      # PATCH/PUT /classroom_teachers/1
+      def update
+        if @classroom_teacher.update(classroom_teacher_params)
+          render json: @classroom_teacher
+        else
+          render json: @classroom_teacher.errors, status: :unprocessable_entity
+        end
+      end
+
+      # DELETE /classroom_teachers/1
+      def destroy
+        @classroom_teacher.void(params.require(:void_reason))
+        render json: { message: 'ClassroomTeacher was successfully removed.' }, status: :ok
+      end
+
+      private
+
+      # Use callbacks to share common setup or constraints between actions.
+      def set_classroom_teacher
+        @classroom_teacher = ClassroomTeacher.find(params[:id])
+      end
+
+      # Only allow a trusted parameter "white list" through.
+      def classroom_teacher_params
+        params.require(:classroom_teacher).permit(:classroom_id, :cohort_term_id, :person_id)
+      end
     end
-  end
-
-  # PATCH/PUT /classroom_teachers/1
-  def update
-    if @classroom_teacher.update(classroom_teacher_params)
-      render json: @classroom_teacher
-    else
-      render json: @classroom_teacher.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /classroom_teachers/1
-  def destroy
-    @classroom_teacher.void(params.require(:void_reason))
-    render json: { message: 'ClassroomTeacher was successfully removed.' }, status: :ok
-  end
-
-  private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_classroom_teacher
-    @classroom_teacher = ClassroomTeacher.find(params[:id])
-  end
-
-  # Only allow a trusted parameter "white list" through.
-  def classroom_teacher_params
-    params.require(:classroom_teacher).permit(:classroom_id, :cohort_term_id, :person_id)
   end
 end

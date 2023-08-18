@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class CohortsControllerTest < ActionDispatch::IntegrationTest
@@ -5,30 +7,32 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
     @cohort = cohorts(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get cohorts_url, as: :json
     assert_response :success
   end
 
-  test "should create cohort" do
+  test 'should create cohort' do
     assert_difference('Cohort.count') do
-      post cohorts_url, params: { cohort: { description: @cohort.description, end_date: @cohort.end_date, name: @cohort.name, short_name: @cohort.short_name, start_date: @cohort.start_date } }, as: :json
+      post cohorts_url,
+           params: { cohort: { description: @cohort.description, end_date: @cohort.end_date, name: @cohort.name, short_name: @cohort.short_name, start_date: @cohort.start_date } }, as: :json
     end
 
     assert_response 201
   end
 
-  test "should show cohort" do
+  test 'should show cohort' do
     get cohort_url(@cohort), as: :json
     assert_response :success
   end
 
-  test "should update cohort" do
-    patch cohort_url(@cohort), params: { cohort: { description: @cohort.description, end_date: @cohort.end_date, name: @cohort.name, short_name: @cohort.short_name, start_date: @cohort.start_date } }, as: :json
+  test 'should update cohort' do
+    patch cohort_url(@cohort),
+          params: { cohort: { description: @cohort.description, end_date: @cohort.end_date, name: @cohort.name, short_name: @cohort.short_name, start_date: @cohort.start_date } }, as: :json
     assert_response 200
   end
 
-  test "should destroy cohort" do
+  test 'should destroy cohort' do
     assert_difference('Cohort.count', -1) do
       delete cohort_url(@cohort), as: :json
     end

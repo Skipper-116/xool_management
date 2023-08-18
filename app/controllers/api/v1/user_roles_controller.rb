@@ -1,51 +1,58 @@
-class Api::V1::UserRolesController < ApplicationController
-  before_action :set_user_role, only: [:show, :update, :destroy]
+# frozen_string_literal: true
 
-  # GET /user_roles
-  def index
-    @user_roles = UserRole.all
+module Api
+  module V1
+    class UserRolesController < ApplicationController
+      before_action :set_user_role, only: %i[show update destroy]
 
-    render json: @user_roles
-  end
+      # GET /user_roles
+      def index
+        @user_roles = UserRole.all
 
-  # GET /user_roles/1
-  def show
-    render json: @user_role
-  end
+        render json: @user_roles
+      end
 
-  # POST /user_roles
-  def create
-    @user_role = UserRole.new(user_role_params)
+      # GET /user_roles/1
+      def show
+        render json: @user_role
+      end
 
-    if @user_role.save
-      render json: @user_role, status: :created, location: @user_role
-    else
-      render json: @user_role.errors, status: :unprocessable_entity
+      # POST /user_roles
+      def create
+        @user_role = UserRole.new(user_role_params)
+
+        if @user_role.save
+          render json: @user_role, status: :created, location: @user_role
+        else
+          render json: @user_role.errors, status: :unprocessable_entity
+        end
+      end
+
+      # PATCH/PUT /user_roles/1
+      def update
+        if @user_role.update(user_role_params)
+          render json: @user_role
+        else
+          render json: @user_role.errors, status: :unprocessable_entity
+        end
+      end
+
+      # DELETE /user_roles/1
+      def destroy
+        @user_role.destroy
+      end
+
+      private
+
+      # Use callbacks to share common setup or constraints between actions.
+      def set_user_role
+        @user_role = UserRole.find(params[:id])
+      end
+
+      # Only allow a trusted parameter "white list" through.
+      def user_role_params
+        params.require(:user_role).permit(:role_id, :person_id)
+      end
     end
   end
-
-  # PATCH/PUT /user_roles/1
-  def update
-    if @user_role.update(user_role_params)
-      render json: @user_role
-    else
-      render json: @user_role.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /user_roles/1
-  def destroy
-    @user_role.destroy
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_role
-      @user_role = UserRole.find(params[:id])
-    end
-
-    # Only allow a trusted parameter "white list" through.
-    def user_role_params
-      params.require(:user_role).permit(:role_id, :person_id)
-    end
 end

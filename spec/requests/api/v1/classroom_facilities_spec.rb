@@ -80,7 +80,8 @@ RSpec.describe 'Classroom Facilities API', type: :request do
       response(200, 'successful') do
         let(:id) { @classroom_facility.id }
         let(:classroom_facility) do
-          { name: 'Classroom Facility', description: 'Classroom Facility Description', quantity: 1, classroom_id: @classroom.id }
+          { name: 'Classroom Facility', description: 'Classroom Facility Description', quantity: 1,
+            classroom_id: @classroom.id }
         end
         let(:Authorization) { AuthHelper.http_login }
 

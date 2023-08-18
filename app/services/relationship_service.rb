@@ -5,11 +5,11 @@ class RelationshipService
   def self.create_relationship(person_a, person_b, relationship_type)
     return if relationship_exists?(person_a, person_b)
 
-    Relationship.create(person_a: person_a, person_b: person_b, relationship_types_id: relationship_type)
+    Relationship.create(person_a:, person_b:, relationship_types_id: relationship_type)
   end
 
   def self.relationship_exists?(person_a, person_b)
-    Relationship.where(person_a: person_a, person_b: person_b).exists?
+    Relationship.where(person_a:, person_b:).exists?
   end
 
   def self.update_relationship(relationship, relationship_params)

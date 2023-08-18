@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+# Route for the API
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
-  mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs'
+  mount Rswag::Ui::Engine => '/'
+  mount Rswag::Api::Engine => '/'
   namespace :api do
     namespace :v1 do
       resources :input_types
@@ -33,3 +37,4 @@ Rails.application.routes.draw do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

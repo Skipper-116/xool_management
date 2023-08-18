@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTeacherRegistries < ActiveRecord::Migration[5.2]
   def change
     create_table :teacher_registries do |t|
@@ -13,8 +15,8 @@ class CreateTeacherRegistries < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    unless foreign_key_exists?(:teacher_registries, column: :captured_by)
-      add_foreign_key :teacher_registries, :people, column: :captured_by, primary_key: :id
-    end
+    return if foreign_key_exists?(:teacher_registries, column: :captured_by)
+
+    add_foreign_key :teacher_registries, :people, column: :captured_by, primary_key: :id
   end
 end

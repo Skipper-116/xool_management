@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ClassroomStudent < VoidableRecord
   after_validation :student_already_in_classroom, :space_available
   belongs_to :classroom
@@ -6,9 +8,13 @@ class ClassroomStudent < VoidableRecord
 
   validates :classroom_id, :cohort_term_id, :person_id, presence: true
   # check if classroom exists before creating
-  validates :classroom_id, presence: true, numericality: { only_integer: true }, inclusion: { in: proc { Classroom.ids } }
+  validates :classroom_id, presence: true, numericality: { only_integer: true }, inclusion: { in: proc {
+                                                                                                    Classroom.ids
+                                                                                                  } }
   # check if cohort_term exists before creating
-  validates :cohort_term_id, presence: true, numericality: { only_integer: true }, inclusion: { in: proc { CohortTerm.ids } }
+  validates :cohort_term_id, presence: true, numericality: { only_integer: true }, inclusion: { in: proc {
+                                                                                                      CohortTerm.ids
+                                                                                                    } }
   # check if person exists before creating
   validates :person_id, presence: true, numericality: { only_integer: true }, inclusion: { in: proc { Person.ids } }
 

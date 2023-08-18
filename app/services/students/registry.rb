@@ -28,7 +28,7 @@ module Students
 
     # get the classroom
     def classroom
-      @classroom ||= Classroom.find_by(id: classroom_id)
+      @classroom ||= Classroom.find classroom_id
     end
 
     # get the latest cohort term

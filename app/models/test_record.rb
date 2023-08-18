@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TestRecord < VoidableRecord
   belongs_to :classroom
   belongs_to :cohort_term

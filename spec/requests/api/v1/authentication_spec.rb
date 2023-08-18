@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
-TAG = 'Authentication'.freeze
+TAG = 'Authentication'
 
 RSpec.describe 'Authentication Management', type: :request do
   # before all tests

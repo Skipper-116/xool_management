@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateRelationships < ActiveRecord::Migration[5.2]
   def change
     create_table :relationships do |t|
@@ -20,8 +22,8 @@ class CreateRelationships < ActiveRecord::Migration[5.2]
       add_foreign_key :relationships, :people, column: :person_a, primary_key: :id
     end
 
-    unless foreign_key_exists?(:relationships, column: :person_b)
-      add_foreign_key :relationships, :people, column: :person_b, primary_key: :id
-    end
+    return if foreign_key_exists?(:relationships, column: :person_b)
+
+    add_foreign_key :relationships, :people, column: :person_b, primary_key: :id
   end
 end
