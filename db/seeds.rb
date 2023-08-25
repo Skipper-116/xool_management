@@ -39,66 +39,66 @@ ActiveRecord::Base.transaction do
                 { name: 'Guardian', description: 'Person who is responible for the student',
                   creator: Person.first.id }])
   # disable referential integrity
-  PersonName.create!(given_name: 'Super', family_name: 'User', person: Person.first,
-                     creator: Person.first.id)
-  User.create!(username: 'superuser', password: 'password', person: Person.first, creator: Person.first.id)
-  UserRole.create!(person: Person.first, role: Role.first, creator: Person.first.id)
+  PersonName.find_or_create_by!(given_name: 'Super', family_name: 'User', person: Person.first,
+                                creator: Person.first.id)
+  User.find_or_create_by!(username: 'superuser', password: 'password', person: Person.first, creator: Person.first.id)
+  UserRole.find_or_create_by!(person: Person.first, role: Role.first, creator: Person.first.id)
   # these are the input types that are used to create the person attributes
-  InputType.create!(name: 'text', pattern: '^[a-zA-Z0-9_]*$', creator: Person.first.id)
-  InputType.create!(name: 'number', pattern: '^[0-9]*$', creator: Person.first.id)
-  InputType.create!(name: 'date', pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', creator: Person.first.id)
-  InputType.create!(name: 'email', pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
-                    creator: Person.first.id)
-  InputType.create!(name: 'textarea', pattern: '^[a-zA-Z0-9_]*$', creator: Person.first.id)
-  InputType.create!(name: 'select', creator: Person.first.id)
-  InputType.create!(name: 'tel', pattern: '^[0-9]{10}$', creator: Person.first.id)
-  InputType.create!(name: 'radio', creator: Person.first.id)
-  InputType.create!(name: 'checkbox', creator: Person.first.id)
-  InputType.create!(name: 'file', creator: Person.first.id)
-  InputType.create!(name: 'month', creator: Person.first.id)
-  InputType.create!(name: 'week', creator: Person.first.id)
-  InputType.create!(name: 'time', creator: Person.first.id)
-  InputType.create!(name: 'datetime-local', pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$',
-                    creator: Person.first.id)
-  InputType.create!(name: 'url', pattern: '^(http|https)://[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
-                    creator: Person.first.id)
-  InputType.create!(name: 'image', creator: Person.first.id)
-  InputType.create!(name: 'color', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'text', pattern: '^[a-zA-Z0-9_]*$', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'number', pattern: '^[0-9]*$', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'date', pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'email', pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
+                               creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'textarea', pattern: '^[a-zA-Z0-9_]*$', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'select', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'tel', pattern: '^[0-9]{10}$', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'radio', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'checkbox', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'file', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'month', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'week', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'time', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'datetime-local', pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$',
+                               creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'url', pattern: '^(http|https)://[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
+                               creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'image', creator: Person.first.id)
+  InputType.find_or_create_by!(name: 'color', creator: Person.first.id)
 
   # these are the person attributes that are used to create the person attributes
-  PersonAttributeType.create!(name: 'Email Address', description: 'Email Address', is_required: false,
-                              input_types_id: 4, creator: Person.first.id)
-  PersonAttributeType.create!(name: 'Phone Number', description: 'Phone Number', is_required: true, input_types_id: 7,
-                              creator: Person.first.id)
-  PersonAttributeType.create!(name: 'Physical Address', description: 'Physical Address', is_required: false,
-                              input_types_id: 1, creator: Person.first.id)
-  PersonAttributeType.create!(name: 'Postal Address', description: 'Postal Address', is_required: false,
-                              input_types_id: 1, creator: Person.first.id)
-  PersonAttributeType.create!(name: 'Education', description: 'Highest education attained', is_required: false,
-                              input_types_id: 1, creator: Person.first.id)
-  PersonAttributeType.create!(name: 'Occupation', description: 'Occupation', is_required: false, input_types_id: 1,
-                              creator: Person.first.id)
+  PersonAttributeType.find_or_create_by!(name: 'Email Address', description: 'Email Address', is_required: false,
+                                         input_types_id: 4, creator: Person.first.id)
+  PersonAttributeType.find_or_create_by!(name: 'Phone Number', description: 'Phone Number', is_required: true, input_types_id: 7,
+                                         creator: Person.first.id)
+  PersonAttributeType.find_or_create_by!(name: 'Physical Address', description: 'Physical Address', is_required: false,
+                                         input_types_id: 1, creator: Person.first.id)
+  PersonAttributeType.find_or_create_by!(name: 'Postal Address', description: 'Postal Address', is_required: false,
+                                         input_types_id: 1, creator: Person.first.id)
+  PersonAttributeType.find_or_create_by!(name: 'Education', description: 'Highest education attained', is_required: false,
+                                         input_types_id: 1, creator: Person.first.id)
+  PersonAttributeType.find_or_create_by!(name: 'Occupation', description: 'Occupation', is_required: false, input_types_id: 1,
+                                         creator: Person.first.id)
 
-  RelationshipType.create!(a_is_to_b: 'Father', b_is_to_a: 'Son', description: 'Father to son relationship',
-                           creator: Person.first.id)
-  RelationshipType.create!(a_is_to_b: 'Mother', b_is_to_a: 'Daughter',
-                           description: 'Mother to daughter relationship',
-                           creator: Person.first.id)
-  RelationshipType.create!(a_is_to_b: 'Brother', b_is_to_a: 'Brother', description: 'Brother to brother relationship',
-                           creator: Person.first.id)
-  RelationshipType.create!(a_is_to_b: 'Sister', b_is_to_a: 'Sister', description: 'Sister to sister relationship',
-                           creator: Person.first.id)
-  RelationshipType.create!(a_is_to_b: 'Husband', b_is_to_a: 'Wife', description: 'Husband to wife relationship',
-                           creator: Person.first.id)
-  RelationshipType.create!(a_is_to_b: 'Wife', b_is_to_a: 'Husband', description: 'Wife to husband relationship',
-                           creator: Person.first.id)
-  RelationshipType.create!(a_is_to_b: 'Friend', b_is_to_a: 'Friend', description: 'Friend to friend relationship',
-                           creator: Person.first.id)
-  RelationshipType.create!(a_is_to_b: 'Guardian', b_is_to_a: 'Ward', description: 'Guardian to ward relationship',
-                           creator: Person.first.id)
-  RelationshipType.create!(a_is_to_b: 'Sponsor', b_is_to_a: 'Beneficiary', description: 'Sponsor to beneficiary relationship',
-                           creator: Person.first.id)
-  RelationshipType.create!(a_is_to_b: 'Employee', b_is_to_a: 'Employer', description: 'Employee to employer relationship',
-                           creator: Person.first.id)
+  RelationshipType.find_or_create_by!(a_is_to_b: 'Father', b_is_to_a: 'Son', description: 'Father to son relationship',
+                                      creator: Person.first.id)
+  RelationshipType.find_or_create_by!(a_is_to_b: 'Mother', b_is_to_a: 'Daughter',
+                                      description: 'Mother to daughter relationship',
+                                      creator: Person.first.id)
+  RelationshipType.find_or_create_by!(a_is_to_b: 'Brother', b_is_to_a: 'Brother', description: 'Brother to brother relationship',
+                                      creator: Person.first.id)
+  RelationshipType.find_or_create_by!(a_is_to_b: 'Sister', b_is_to_a: 'Sister', description: 'Sister to sister relationship',
+                                      creator: Person.first.id)
+  RelationshipType.find_or_create_by!(a_is_to_b: 'Husband', b_is_to_a: 'Wife', description: 'Husband to wife relationship',
+                                      creator: Person.first.id)
+  RelationshipType.find_or_create_by!(a_is_to_b: 'Wife', b_is_to_a: 'Husband', description: 'Wife to husband relationship',
+                                      creator: Person.first.id)
+  RelationshipType.find_or_create_by!(a_is_to_b: 'Friend', b_is_to_a: 'Friend', description: 'Friend to friend relationship',
+                                      creator: Person.first.id)
+  RelationshipType.find_or_create_by!(a_is_to_b: 'Guardian', b_is_to_a: 'Ward', description: 'Guardian to ward relationship',
+                                      creator: Person.first.id)
+  RelationshipType.find_or_create_by!(a_is_to_b: 'Sponsor', b_is_to_a: 'Beneficiary', description: 'Sponsor to beneficiary relationship',
+                                      creator: Person.first.id)
+  RelationshipType.find_or_create_by!(a_is_to_b: 'Employee', b_is_to_a: 'Employer', description: 'Employee to employer relationship',
+                                      creator: Person.first.id)
 end
 # rubocop:enable Metrics/BlockLength
